@@ -68,3 +68,13 @@ switch (operation) {
 
 // Print the output
 console.log(output);
+
+// Ask the user if they'd like to do another calculation
+prompt("Would you like to perform another calculation? Yes or no");
+let anotherCalc = readline.question();
+if (anotherCalc.toLowerCase() === "yes") {
+  anotherCalc = readline.question();
+} else {
+  process.exit(1);
+}
+// -->
