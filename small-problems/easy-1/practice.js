@@ -64,7 +64,9 @@ const readline = require("readline-sync");
 
 // Create a simple tip calculator. The program should prompt for a bill amount and a tip rate. The program must compute the tip, and then log both the tip and the total amount of the bill to the console. You can ignore input validation and assume that the user will enter numbers.
 
-const ask = (message) => console.log(`=> ${message}`);
+function ask(message) {
+  console.log(`=> ${message}`);
+}
 
 function getMealPrice() {
   ask("What is the total of the bill?");
@@ -74,8 +76,8 @@ function getMealPrice() {
   let total = bill + tip;
 
   return `
-    The tip is ${tip}
-    The total is ${total}
+    The tip is ${tip.toFixed(2)}
+    The total is ${total.toFixed(2)}
   `;
 }
 
