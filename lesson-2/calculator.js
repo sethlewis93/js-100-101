@@ -77,4 +77,3 @@ if (anotherCalc.toLowerCase() === "yes") {
 } else {
   process.exit(1);
 }
-// -->
