@@ -42,24 +42,41 @@ const readline = require("readline-sync");
 // }
 
 // Build a program that asks the user to enter the length and width of a room in meters, and then logs the area of the room to the console in both square meters and square feet.
-
 // Note: 1 square meter == 10.7639 square feet
-
 // Do not worry about validating the input at this time. Use the readlineSync.prompt method to collect user input.
 
-const prompt = (message) => console.log(`=> ${message}`);
+// const prompt = (message) => console.log(`=> ${message}`);
 
-prompt("Enter the length of the room in meters");
-let length = readline.question();
+// prompt("Enter the length of the room in meters");
+// let length = readline.question();
 
-prompt("Enter the width of the room in meters");
-let width = readline.question();
+// prompt("Enter the width of the room in meters");
+// let width = readline.question();
 
-const area = (l, w) => {
-  let squareMeters = l * w;
-  return `The area of the room is ${squareMeters} square meters (${
-    squareMeters * 10.7639
-  } square feet).`;
-};
+// const area = (l, w) => {
+//   let squareMeters = l * w;
+//   return `The area of the room is ${squareMeters} square meters (${
+//     squareMeters * 10.7639
+//   } square feet).`;
+// };
 
-console.log(area(length, width));
+// console.log(area(length, width));
+
+// Create a simple tip calculator. The program should prompt for a bill amount and a tip rate. The program must compute the tip, and then log both the tip and the total amount of the bill to the console. You can ignore input validation and assume that the user will enter numbers.
+
+const ask = (message) => console.log(`=> ${message}`);
+
+function getMealPrice() {
+  ask("What is the total of the bill?");
+  let bill = Number(readline.question());
+  ask("What is the tip charge in percentage?");
+  let tip = Number(bill * (readline.question() / 100));
+  let total = bill + tip;
+
+  return `
+    The tip is ${tip}
+    The total is ${total}
+  `;
+}
+
+console.log(getMealPrice());
