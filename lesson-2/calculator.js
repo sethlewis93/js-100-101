@@ -53,16 +53,16 @@ while (!["1", "2", "3", "4"].includes(operation)) {
 let output;
 switch (operation) {
   case "1":
-    output = `The ouput is ${num1 + num2}`;
+    output = `The ouput is ${Number(num1) + Number(num2)}`;
     break;
   case "2":
-    output = `The output is ${num1 - num2}`;
+    output = `The output is ${Number(num1) - Number(num2)}`;
     break;
   case "3":
-    output = `The output is ${num1 * num2}`;
+    output = `The output is ${Number(num1) * Number(num2)}`;
     break;
   case "4":
-    output = `The output is ${num1 / num2}`;
+    output = `The output is ${Number(num1) / Number(num2)}`;
     break;
 }
 
