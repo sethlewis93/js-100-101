@@ -72,6 +72,6 @@ while (true) {
 
   // Ask the user if they'd like to do another calculation
   prompt("Would you like to perform another calculation (y/n)?");
-  let anotherCalc = readline.question();
-  if (anotherCalc !== "y") break;
+  let answer = readline.question();
+  if (answer.toLowerCase() !== "y") break;
 }
