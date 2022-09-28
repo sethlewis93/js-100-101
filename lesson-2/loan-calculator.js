@@ -20,9 +20,12 @@ let monthlyInterest = (input() / 100 / 12) * 100; // <- https://www.thebalancemo
 console.log(`APR: ${monthlyInterest}`);
 
 // Get duration of loan and conver to months
-/** Code here */
+ask("What is the length of the loan in years?")
+let durationInMonths = input() * 12;
+console.log(`DURATION: ${durationInMonths} months`)
 
-// let monthlyPayment =
-//   principal * (monthlyInterest / (1 - Math.pow(1 + monthlyInterest, -durationInMonths)));
+// Calculate the monthly payment
+let monthlyPayment =
+  principal * (monthlyInterest / (1 - Math.pow((1 + monthlyInterest), (-durationInMonths))));
 
-// console.log(monthlyPayment);
+console.log(`Your monthly payment is $${monthlyPayment.toFixed(2)}`);
