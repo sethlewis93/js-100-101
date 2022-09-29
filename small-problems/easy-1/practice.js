@@ -108,34 +108,57 @@ function prompt(message) {
 } // chance to refactor here and anywhere user input obtained?
 
 function sumFunction(num) {
-  // reduce using + operator
+  // Set backstop
+  let result = 1;
+
+  for (let i = num; i > 1; i -= 1) {
+    result += i;
+  }
+
+  console.log(`The sum of the integers between ${num} and 1 is: ${result}`);
+
+  return result;
 }
 
 function productFunction(num) {
-  // reduce using * operator
+  // Set backstop
+  let result = 1;
+
+  for (let i = num; i > 0; i -= 1) {
+    result *= i;
+  }
+
+  console.log(`The product of the integers between ${num} and 1 is: ${result}`);
+
+  return result;
 }
 
 while (true) {
+  // Receive input
   prompt("Please enter an integer greater than 0: ");
   let userNumInput = readline.question();
 
+  // Validate input (ensuring it is not '' or 0 or does not evaluate to NaN)
   if (isInvalidNum(userNumInput)) {
     prompt("Please be sure to enter only numbers greater than 0");
     userNumInput = readline.question();
   }
 
+  // Receive operation selection
   prompt("Enter 's' to compute the sum, or 'p' to compute the product: ");
   let userSelection = readline.question();
 
   if (!isValidSelection(userSelection)) {
+    // <- Problem here: "S" or "P" doesn't trigger invalid message but also doesn't allow program to continue.
     prompt("Please be sure to enter only the letters 's' or 'p': ");
     userSelection = readline.question();
-    if (userSelection === "s") {
-      // call sumFunction()
-    } else if (userSelection === "p") {
-      // call productFunction()
-    }
+  }
+
+  if (userSelection === "s") {
+    sumFunction(Number(userNumInput));
+    break;
+  } else if (userSelection === "p") {
+    productFunction(Number(userNumInput));
+    break;
   }
 }
-
-// console.log(`The sum of the integers between ${} is ${}`.);
