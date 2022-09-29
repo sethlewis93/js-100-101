@@ -1,7 +1,8 @@
 let readline = require("readline-sync");
 
-// Shorthand for readline.question()
-let ask = readline.question;
+function prompt(message) {
+  console.log(`==> ${message}`);
+}
 
 function isInvalidInput(input) {
   return (
@@ -12,33 +13,36 @@ function isInvalidInput(input) {
 }
 
 // Get principal
-let principal = ask("What is the principal amount of the loan?: ");
+prompt("What is the principal amount of the loan?: ");
+let principal = readline.question();
 
-if (isInvalidInput(principal)) {
-  console.log("Invalid input: please enter the loan amount in numerals only"); // refactor all the log calls
-  principal = ask("What is the principal amount of the loan?: ");
+while (isInvalidInput(principal)) {
+  prompt("Invalid input: please enter the loan amount in numerals only"); // refactor all the log calls
+  principal = readline.question();
 }
-console.log(`==> PRINCIPAL: $${principal}`);
+prompt(`==> PRINCIPAL: $${principal}`);
 
 // Get interest rate
-let interestRate = ask("What is the current APR?: ");
+prompt("What is the current APR?: ");
+let interestRate = readline.question();
 
-if (isInvalidInput(interestRate)) {
-  console.log("Invalid input: pelase enter the APR in numerals only");
-  interestRate = ask("What is the current APR?: ");
+while (isInvalidInput(interestRate)) {
+  prompt("Invalid input: pelase enter the APR in numerals only");
+  interestRate = readline.question();
 }
-console.log(`==> APR: ${interestRate}%`);
+prompt(`==> APR: ${interestRate}%`);
 
 // Get duration of loan and convert to months
-let lengthInMonths = ask("What is the length of the loan in months?: ");
+prompt("What is the length of the loan in months?: ");
+let lengthInMonths = readline.question();
 
-if (isInvalidInput(lengthInMonths)) {
-  console.log(
+while (isInvalidInput(lengthInMonths)) {
+  prompt(
     "Invalid input: please enter the duration of the loan in months only without decimal places."
   );
-  lengthInMonths = ask("What is the length of the loan in months?: ");
+  lengthInMonths = readline.question();
 }
-console.log(`==> DURATION: ${lengthInMonths} months`);
+prompt(`==> DURATION: ${lengthInMonths} months`);
 
 // Calculate monthly interest
 let annualRate = Number(interestRate) / 100;
@@ -49,4 +53,4 @@ let monthlyPayment =
   Number(principal) *
   (monthlyRate / (1 - Math.pow(1 + monthlyRate, -Number(lengthInMonths))));
 
-console.log(`Your monthly payment is $${monthlyPayment.toFixed(2)}`);
+prompt(`Your monthly payment is $${monthlyPayment.toFixed(2)}`);
