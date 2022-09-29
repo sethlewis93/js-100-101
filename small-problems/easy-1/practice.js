@@ -64,21 +64,78 @@ const readline = require("readline-sync");
 
 // Create a simple tip calculator. The program should prompt for a bill amount and a tip rate. The program must compute the tip, and then log both the tip and the total amount of the bill to the console. You can ignore input validation and assume that the user will enter numbers.
 
-function ask(message) {
+// function ask(message) {
+//   console.log(`=> ${message}`);
+// }
+
+// function getMealPrice() {
+//   ask("What is the total of the bill?");
+//   let bill = Number(readline.question());
+//   ask("What is the tip charge in percentage?");
+//   let tip = Number(bill * (readline.question() / 100));
+//   let total = bill + tip;
+
+//   return `
+//     The tip is ${tip.toFixed(2)}
+//     The total is ${total.toFixed(2)}
+//   `;
+// }
+
+// console.log(getMealPrice());
+
+// Write a program that asks the user to enter an integer greater than 0, then asks whether the user wants to determine the sum or the product of all numbers between 1 and the entered integer, inclusive.
+
+// PROMPT the user to enter an integer greater than 0 (userInput)
+// --> IF userInput is <=0 OR if userInput is not a number OR if user enters empty string, send invalid message and prompt again
+// PROMPT the use to enter 's' or 'p'
+// --> IF userInput is not 's' or 'p' (when lowercased), send invalid message and prompt again
+// Take userInput and calculate either sum or product by reducing the numbers between 1 and the userInput provided
+// PRINT either sum or product
+// EXIT
+
+function isInvalidNum(input) {
+  return input.trimStart() === "" || isNaN(input) || input <= 0;
+}
+
+function isValidSelection(selection) {
+  return (
+    selection[0].toLowerCase() === "s" || selection[0].toLowerCase() === "p"
+  );
+}
+
+function prompt(message) {
   console.log(`=> ${message}`);
+} // chance to refactor here and anywhere user input obtained?
+
+function sumFunction(num) {
+  // reduce using + operator
 }
 
-function getMealPrice() {
-  ask("What is the total of the bill?");
-  let bill = Number(readline.question());
-  ask("What is the tip charge in percentage?");
-  let tip = Number(bill * (readline.question() / 100));
-  let total = bill + tip;
-
-  return `
-    The tip is ${tip.toFixed(2)}
-    The total is ${total.toFixed(2)}
-  `;
+function productFunction(num) {
+  // reduce using * operator
 }
 
-console.log(getMealPrice());
+while (true) {
+  prompt("Please enter an integer greater than 0: ");
+  let userNumInput = readline.question();
+
+  if (isInvalidNum(userNumInput)) {
+    prompt("Please be sure to enter only numbers greater than 0");
+    userNumInput = readline.question();
+  }
+
+  prompt("Enter 's' to compute the sum, or 'p' to compute the product: ");
+  let userSelection = readline.question();
+
+  if (!isValidSelection(userSelection)) {
+    prompt("Please be sure to enter only the letters 's' or 'p': ");
+    userSelection = readline.question();
+    if (userSelection === "s") {
+      // call sumFunction()
+    } else if (userSelection === "p") {
+      // call productFunction()
+    }
+  }
+}
+
+// console.log(`The sum of the integers between ${} is ${}`.);
