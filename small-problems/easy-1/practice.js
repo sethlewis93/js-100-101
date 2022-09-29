@@ -15,11 +15,17 @@ const readline = require("readline-sync");
 // console.log(isOdd(7)); // => true
 // console.log(isOdd(-7)); // => true
 
+// <---------------------------------------------- *** -------------------------------------->
+// <---------------------------------------------- *** -------------------------------------->
+
 // Log all odd numbers from 1 to 99, inclusive, to the console, with each number on a separate line.
 
 // for (let i = 1; i < 100; i += 2) {
 //   console.log(i + "\n");
 // }
+
+// <---------------------------------------------- *** -------------------------------------->
+// <---------------------------------------------- *** -------------------------------------->
 
 // Log all even numbers from 1 to 99, inclusive, to the console, with each number on a separate line.
 
@@ -40,6 +46,9 @@ const readline = require("readline-sync");
 
 //   console.log(number);
 // }
+
+// <---------------------------------------------- *** -------------------------------------->
+// <---------------------------------------------- *** -------------------------------------->
 
 // Build a program that asks the user to enter the length and width of a room in meters, and then logs the area of the room to the console in both square meters and square feet.
 // Note: 1 square meter == 10.7639 square feet
@@ -62,6 +71,9 @@ const readline = require("readline-sync");
 
 // console.log(area(length, width));
 
+// <---------------------------------------------- *** -------------------------------------->
+// <---------------------------------------------- *** -------------------------------------->
+
 // Create a simple tip calculator. The program should prompt for a bill amount and a tip rate. The program must compute the tip, and then log both the tip and the total amount of the bill to the console. You can ignore input validation and assume that the user will enter numbers.
 
 // function ask(message) {
@@ -83,6 +95,9 @@ const readline = require("readline-sync");
 
 // console.log(getMealPrice());
 
+// <---------------------------------------------- *** -------------------------------------->
+// <---------------------------------------------- *** -------------------------------------->
+
 // Write a program that asks the user to enter an integer greater than 0, then asks whether the user wants to determine the sum or the product of all numbers between 1 and the entered integer, inclusive.
 
 // PROMPT the user to enter an integer greater than 0 (userInput)
@@ -98,14 +113,12 @@ function isInvalidNum(input) {
 }
 
 function isValidSelection(selection) {
-  return (
-    selection[0].toLowerCase() === "s" || selection[0].toLowerCase() === "p"
-  );
+  return selection === "s" || selection === "p";
 }
 
 function prompt(message) {
   console.log(`=> ${message}`);
-} // chance to refactor here and anywhere user input obtained?
+}
 
 function sumFunction(num) {
   // Set backstop
@@ -148,16 +161,16 @@ while (true) {
   prompt("Enter 's' to compute the sum, or 'p' to compute the product: ");
   let userSelection = readline.question();
 
-  if (!isValidSelection(userSelection)) {
+  if (!isValidSelection(userSelection.toLowerCase())) {
     // <- Problem here: "S" or "P" doesn't trigger invalid message but also doesn't allow program to continue.
     prompt("Please be sure to enter only the letters 's' or 'p': ");
     userSelection = readline.question();
   }
 
-  if (userSelection === "s") {
+  if (userSelection.toLowerCase() === "s") {
     sumFunction(Number(userNumInput));
     break;
-  } else if (userSelection === "p") {
+  } else if (userSelection.toLowerCase() === "p") {
     productFunction(Number(userNumInput));
     break;
   }
