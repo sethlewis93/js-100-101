@@ -3,21 +3,25 @@ let readline = require("readline-sync");
 // Shorthand for readline.question()
 let ask = readline.question;
 
+function isInvalidInput(input) {
+  console.log(typeof input);
+  return input.trimStart() === "" || input <= 0 || isNaN(input);
+}
+
 // Get principal
-let principal = Number(ask("What is the principal amount of the loan?: "));
-if (isNaN(principal)) {
+let principal = ask("What is the principal amount of the loan?: ");
+if (isInvalidInput(principal)) {
   console.log("Invalid input: please enter the loan amount in numerals only");
-  principal = Number(ask("What is the principal amount of the loan?: "));
+  principal = ask("What is the principal amount of the loan?: ");
 }
 console.log(`==> PRINCIPAL: $${principal}`);
 
 // Get APR, convert to monthly interest rate
-let monthlyInterest =
-  Number(ask("What is the current APR?: ") / 100 / 12) * 100;
+let monthlyInterest = (ask("What is the current APR?: ") / 100 / 12) * 100; // <- This is being COERCED to a typeof "number" and throwing an error on the input.trimStart(). Needed to revise the interest calculations anyhow which will solve this.
 
-if (isNaN(monthlyInterest)) {
+if (isInvalidInput(monthlyInterest)) {
   console.log("Invalid input: pelase enter the APR in numerals only");
-  monthlyInterest = Number(ask("What is the current APR?: ") / 100 / 12) * 100;
+  monthlyInterest = (ask("What is the current APR?: ") / 100 / 12) * 100;
 }
 console.log(`==> Monthly APR: ${monthlyInterest}%`);
 
@@ -25,11 +29,11 @@ console.log(`==> Monthly APR: ${monthlyInterest}%`);
 let durationInMonths = Number(
   ask("What is the length of the loan in months?: ")
 );
-if (isNaN(durationInMonths)) {
+if (isInvalidInput(durationInMonths)) {
   console.log(
     "Invalid input: please enter the duration of the loan in months only without decimal places."
   );
-  durationInMonths = Number(ask("What is the length of the loan in months?: "));
+  durationInMonths = ask("What is the length of the loan in months?: ");
 }
 console.log(`==> DURATION: ${durationInMonths} months`);
 
