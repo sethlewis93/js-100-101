@@ -121,12 +121,8 @@ function prompt(message) {
 }
 
 function sumFunction(num) {
-  // Set backstop
-  let result = 1;
-
-  for (let i = num; i > 1; i -= 1) {
-    result += i;
-  }
+  // Credit to LS student Eric Chang for this equation
+  let result = (num * (num + 1)) / 2;
 
   console.log(`The sum of the integers between ${num} and 1 is: ${result}`);
 
@@ -162,7 +158,6 @@ while (true) {
   let userSelection = readline.question();
 
   if (!isValidSelection(userSelection.toLowerCase())) {
-    // <- Problem here: "S" or "P" doesn't trigger invalid message but also doesn't allow program to continue.
     prompt("Please be sure to enter only the letters 's' or 'p': ");
     userSelection = readline.question();
   }
