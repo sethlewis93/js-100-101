@@ -4,13 +4,18 @@ let readline = require("readline-sync");
 let ask = readline.question;
 
 function isInvalidInput(input) {
-  return input.trimStart() === "" || input <= 0 || isNaN(input);
+  return (
+    input.trimStart() === "" ||
+    Number(input) <= 0 ||
+    Number.isNaN(Number(input))
+  );
 }
 
 // Get principal
 let principal = ask("What is the principal amount of the loan?: ");
+
 if (isInvalidInput(principal)) {
-  console.log("Invalid input: please enter the loan amount in numerals only");
+  console.log("Invalid input: please enter the loan amount in numerals only"); // refactor all the log calls
   principal = ask("What is the principal amount of the loan?: ");
 }
 console.log(`==> PRINCIPAL: $${principal}`);
@@ -25,23 +30,23 @@ if (isInvalidInput(interestRate)) {
 console.log(`==> APR: ${interestRate}%`);
 
 // Get duration of loan and convert to months
-let durationInMonths = ask("What is the length of the loan in months?: ");
-if (isInvalidInput(durationInMonths)) {
+let lengthInMonths = ask("What is the length of the loan in months?: ");
+
+if (isInvalidInput(lengthInMonths)) {
   console.log(
     "Invalid input: please enter the duration of the loan in months only without decimal places."
   );
-  durationInMonths = ask("What is the length of the loan in months?: ");
+  lengthInMonths = ask("What is the length of the loan in months?: ");
 }
-console.log(`==> DURATION: ${durationInMonths} months`);
+console.log(`==> DURATION: ${lengthInMonths} months`);
 
 // Calculate monthly interest
-let annualRate = interestRate / 100;
+let annualRate = Number(interestRate) / 100;
 let monthlyRate = (annualRate / 12) * 100;
 
-// Calculate the monthly payment based on monthly interest rate
+// Calculate monthly payment
 let monthlyPayment =
   Number(principal) *
-  (Number(monthlyRate) /
-    (1 - Math.pow(1 + Number(monthlyRate), Number(-durationInMonths))));
+  (monthlyRate / (1 - Math.pow(1 + monthlyRate, -Number(lengthInMonths))));
 
 console.log(`Your monthly payment is $${monthlyPayment.toFixed(2)}`);
