@@ -258,21 +258,44 @@ const readline = require("readline-sync");
 // --> compare the input to nums less than the input but greater than 0:
 // ----> if the nums are not multiples of of 3 or 5: do not add them to the floor: else, add them to the floor
 // RETURN the floor
-function multisum(num) {
+
+function factorial(num) {
   let result = 1;
-
-  for (let counter = result; counter < num; counter += 1) {
-    if (counter % 3 !== 0 || counter % 5 !== 0) {
-      continue;
-    }
-    result += counter;
+  for (let i = num; i > 0; i -= 1) {
+    console.log(i);
+    result *= i;
+    debugger;
   }
-
-  console.log(result);
   return result;
 }
 
-multisum(3); // 3
-multisum(5); // 8
-multisum(10); // 33
-multisum(1000); // 234168
+// console.log(factorial(1)); // => 1
+// console.log(factorial(2)); // => 2
+// console.log(factorial(3)); // => 6
+// console.log(factorial(4)); // => 24
+// console.log(factorial(5)); // => 120
+// console.log(factorial(6)); // => 720
+// console.log(factorial(7)); // => 5040
+// console.log(factorial(8)); // => 40320
+
+function multisum(num) {
+  let result = 1;
+  let arr = [];
+
+  for (let i = num; i > result; i -= 1) {
+    arr.push(i);
+  }
+
+  return arr.reduce((prev, curr) => {
+    let val = 0;
+    if (prev % 3 === 0 || prev % 5 === 0) {
+      val = prev + curr;
+    }
+    return val;
+  }, result);
+}
+
+console.log(multisum(3)); // 3
+console.log(multisum(5)); // 8
+console.log(multisum(10)); // 33
+console.log(multisum(1000)); // 234168
