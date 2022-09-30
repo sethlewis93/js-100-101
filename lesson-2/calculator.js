@@ -1,9 +1,5 @@
-const readline = require("readline-sync");
+let readline = require("readline-sync");
 let message = require("./calculator-messages");
-
-function prompt(message) {
-  console.log(`=> ${message}`);
-}
 
 // Validate Number input function
 function invalidNumber(number) {
