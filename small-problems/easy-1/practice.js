@@ -108,65 +108,88 @@ const readline = require("readline-sync");
 // PRINT either sum or product
 // EXIT
 
-function isInvalidNum(input) {
-  return input.trimStart() === "" || isNaN(input) || input <= 0;
+// function isInvalidNum(input) {
+//   return input.trimStart() === "" || isNaN(input) || input <= 0;
+// }
+
+// function isValidSelection(selection) {
+//   return selection === "s" || selection === "p";
+// }
+
+// function prompt(message) {
+//   console.log(`=> ${message}`);
+// }
+
+// function sumFunction(num) {
+//   // Credit to LS student Eric Chang for this equation
+//   let result = (num * (num + 1)) / 2;
+
+//   console.log(`The sum of the integers between ${num} and 1 is: ${result}`);
+
+//   return result;
+// }
+
+// function productFunction(num) {
+//   // Set backstop
+//   let result = 1;
+
+//   for (let i = num; i > 0; i -= 1) {
+//     result *= i;
+//   }
+
+//   console.log(`The product of the integers between ${num} and 1 is: ${result}`);
+
+//   return result;
+// }
+
+// while (true) {
+//   // Receive input
+//   prompt("Please enter an integer greater than 0: ");
+//   let userNumInput = readline.question();
+
+//   // Validate input (ensuring it is not '' or 0 or does not evaluate to NaN)
+//   if (isInvalidNum(userNumInput)) {
+//     prompt("Please be sure to enter only numbers greater than 0");
+//     userNumInput = readline.question();
+//   }
+
+//   // Receive operation selection
+//   prompt("Enter 's' to compute the sum, or 'p' to compute the product: ");
+//   let userSelection = readline.question();
+
+//   if (!isValidSelection(userSelection.toLowerCase())) {
+//     prompt("Please be sure to enter only the letters 's' or 'p': ");
+//     userSelection = readline.question();
+//   }
+
+//   if (userSelection.toLowerCase() === "s") {
+//     sumFunction(Number(userNumInput));
+//     break;
+//   } else if (userSelection.toLowerCase() === "p") {
+//     productFunction(Number(userNumInput));
+//     break;
+//   }
+// }
+
+// <---------------------------------------------- *** -------------------------------------->
+// <---------------------------------------------- *** -------------------------------------->
+
+// Write a function that takes two strings as arguments, determines the length of the two strings, and then returns the result of concatenating the shorter string, the longer string, and the shorter string once again. You may assume that the strings are of different lengths.
+
+// STORE length of each string
+// COMPARE: if sting 'a' is > string 'b',
+// RETURN b+a+b
+// --> ELSE if the inverse, return a+b+a
+
+function shortLongShort(str1, str2) {
+  let joinedString;
+
+  str1.length > str2.length
+    ? (joinedString = str1 + str2 + str1)
+    : (joinedString = str2 + str1 + str2);
+
+  console.log(joinedString);
+  return joinedString;
 }
 
-function isValidSelection(selection) {
-  return selection === "s" || selection === "p";
-}
-
-function prompt(message) {
-  console.log(`=> ${message}`);
-}
-
-function sumFunction(num) {
-  // Credit to LS student Eric Chang for this equation
-  let result = (num * (num + 1)) / 2;
-
-  console.log(`The sum of the integers between ${num} and 1 is: ${result}`);
-
-  return result;
-}
-
-function productFunction(num) {
-  // Set backstop
-  let result = 1;
-
-  for (let i = num; i > 0; i -= 1) {
-    result *= i;
-  }
-
-  console.log(`The product of the integers between ${num} and 1 is: ${result}`);
-
-  return result;
-}
-
-while (true) {
-  // Receive input
-  prompt("Please enter an integer greater than 0: ");
-  let userNumInput = readline.question();
-
-  // Validate input (ensuring it is not '' or 0 or does not evaluate to NaN)
-  if (isInvalidNum(userNumInput)) {
-    prompt("Please be sure to enter only numbers greater than 0");
-    userNumInput = readline.question();
-  }
-
-  // Receive operation selection
-  prompt("Enter 's' to compute the sum, or 'p' to compute the product: ");
-  let userSelection = readline.question();
-
-  if (!isValidSelection(userSelection.toLowerCase())) {
-    prompt("Please be sure to enter only the letters 's' or 'p': ");
-    userSelection = readline.question();
-  }
-
-  if (userSelection.toLowerCase() === "s") {
-    sumFunction(Number(userNumInput));
-    break;
-  } else if (userSelection.toLowerCase() === "p") {
-    productFunction(Number(userNumInput));
-    break;
-  }
-}
+shortLongShort("AB", "banana");
