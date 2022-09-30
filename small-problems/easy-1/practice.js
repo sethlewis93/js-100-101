@@ -181,15 +181,7 @@ const readline = require("readline-sync");
 // RETURN b+a+b
 // --> ELSE if the inverse, return a+b+a
 
-function shortLongShort(str1, str2) {
-  let joinedString;
+const shortLongShort = (s1, s2) =>
+  s1.length > s2.length ? s1 + s2 + s1 : s2 + s1 + s2;
 
-  str1.length > str2.length
-    ? (joinedString = str1 + str2 + str1)
-    : (joinedString = str2 + str1 + str2);
-
-  console.log(joinedString);
-  return joinedString;
-}
-
-shortLongShort("AB", "banana");
+console.log(shortLongShort("AB", "D"));
