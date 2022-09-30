@@ -224,25 +224,55 @@ const readline = require("readline-sync");
  * Using this information, update the function from the previous exercise to determine leap years both before and after 1752.
  * */
 
-function isLeapYear(year) {
-  if (year <= 1752 && year > 0) {
-    return year % 4 === 0;
+// function isLeapYear(year) {
+//   if (year <= 1752 && year > 0) {
+//     return year % 4 === 0;
+//   }
+//   if (year > 1752) {
+//     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+//   }
+// }
+
+// console.log(isLeapYear(2016)); // true
+// console.log(isLeapYear(2015)); // false
+// console.log(isLeapYear(2100)); // false
+// console.log(isLeapYear(2400)); // true
+// console.log(isLeapYear(240000)); // true
+// console.log(isLeapYear(240001)); // false
+// console.log(isLeapYear(2000)); // true
+// console.log(isLeapYear(1900)); // false
+// console.log(isLeapYear(1752)); // true
+// console.log(isLeapYear(1700)); // true
+// console.log(isLeapYear(1)); // false
+// console.log(isLeapYear(100)); // true
+// console.log(isLeapYear(400)); // true
+
+/**
+ Write a function that computes the sum of all numbers between 1 and some other number, inclusive, that are multiples of 3 or 5. For instance, if the supplied number is 20, the result should be 98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20).
+ 
+ You may assume that the number passed in is an integer greater than 1.
+ */
+
+// Receive input
+// if input is greater than the floor:
+// --> compare the input to nums less than the input but greater than 0:
+// ----> if the nums are not multiples of of 3 or 5: do not add them to the floor: else, add them to the floor
+// RETURN the floor
+function multisum(num) {
+  let result = 1;
+
+  for (let counter = result; counter < num; counter += 1) {
+    if (counter % 3 !== 0 || counter % 5 !== 0) {
+      continue;
+    }
+    result += counter;
   }
-  if (year > 1752) {
-    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-  }
+
+  console.log(result);
+  return result;
 }
 
-console.log(isLeapYear(2016)); // true
-console.log(isLeapYear(2015)); // false
-console.log(isLeapYear(2100)); // false
-console.log(isLeapYear(2400)); // true
-console.log(isLeapYear(240000)); // true
-console.log(isLeapYear(240001)); // false
-console.log(isLeapYear(2000)); // true
-console.log(isLeapYear(1900)); // false
-console.log(isLeapYear(1752)); // true
-console.log(isLeapYear(1700)); // true
-console.log(isLeapYear(1)); // false
-console.log(isLeapYear(100)); // true
-console.log(isLeapYear(400)); // true
+multisum(3); // 3
+multisum(5); // 8
+multisum(10); // 33
+multisum(1000); // 234168
