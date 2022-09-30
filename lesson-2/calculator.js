@@ -1,6 +1,6 @@
 const readline = require("readline-sync");
+let message = require("./calculator-messages");
 
-// Basic prompt
 function prompt(message) {
   console.log(`=> ${message}`);
 }
@@ -13,40 +13,33 @@ function invalidNumber(number) {
 
 while (true) {
   // Ask and receive the first number
-  prompt("Welcome to calculator!");
-  prompt("Please enter the first number.");
+  message.welcome();
+  message.num1();
   let num1 = readline.question();
 
   // Validate first number
   while (invalidNumber(num1)) {
-    prompt("Hmmm.... that doesn't look like a valid number");
+    message.invalidNum();
     num1 = readline.question();
   }
 
   // Ask and receive second number.
-  prompt("Please enter the second number");
+  message.num2();
   let num2 = readline.question();
 
   // Validate the second number
   while (invalidNumber(num2)) {
-    prompt("Hmm... that doesn't look like a valid number");
+    message.invalidNum();
     num2 = readline.question();
   }
 
   // User selects the operations
-  console.log(`=> What operation would you like to perform on these numbers? You can select:
-  
-      "1" for Addition, 
-      "2" for Subtraction, 
-      "3" for Multiplication, or
-      "4" for Division.
-  
-  `);
+  message.operations();
 
   // Validate operation input
   let operation = readline.question();
   while (!["1", "2", "3", "4"].includes(operation)) {
-    prompt("Please select a valid operation.");
+    message.invalidOperation();
     operation = readline.question();
   }
 
@@ -71,7 +64,7 @@ while (true) {
   console.log(output);
 
   // Ask the user if they'd like to do another calculation
-  prompt("Would you like to perform another calculation (y/n)?");
+  message.startOver();
   let answer = readline.question();
   if (answer.toLowerCase() !== "y") {
     prompt("Goodbye!");
