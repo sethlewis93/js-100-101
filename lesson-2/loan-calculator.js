@@ -53,4 +53,4 @@ let monthlyPayment =
   Number(principal) *
   (monthlyRate / (1 - Math.pow(1 + monthlyRate, -Number(lengthInMonths))));
 
-prompt(`Your monthly payment is $${monthlyPayment.toFixed(2)}`); // <- RETURNS '$20,833.33' which is the same as 'principal' & 'monthlyRate'.
+prompt(`Your monthly payment is $${monthlyPayment.toFixed(2)}`); // <- RETURNS '$20,833.33' which is the same as 'principal' * 'monthlyRate'.
