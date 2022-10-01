@@ -247,52 +247,32 @@ const readline = require("readline-sync");
 // console.log(isLeapYear(100)); // true
 // console.log(isLeapYear(400)); // true
 
+// <---------------------------------------------- *** -------------------------------------->
+// <---------------------------------------------- *** -------------------------------------->
+
 /**
  Write a function that computes the sum of all numbers between 1 and some other number, inclusive, that are multiples of 3 or 5. For instance, if the supplied number is 20, the result should be 98 (3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 + 20).
  
  You may assume that the number passed in is an integer greater than 1.
  */
 
-// Receive input
-// if input is greater than the floor:
-// --> compare the input to nums less than the input but greater than 0:
-// ----> if the nums are not multiples of of 3 or 5: do not add them to the floor: else, add them to the floor
-// RETURN the floor
-
-function factorial(num) {
-  let result = 1;
-  for (let i = num; i > 0; i -= 1) {
-    console.log(i);
-    result *= i;
-    debugger;
-  }
-  return result;
-}
-
-// console.log(factorial(1)); // => 1
-// console.log(factorial(2)); // => 2
-// console.log(factorial(3)); // => 6
-// console.log(factorial(4)); // => 24
-// console.log(factorial(5)); // => 120
-// console.log(factorial(6)); // => 720
-// console.log(factorial(7)); // => 5040
-// console.log(factorial(8)); // => 40320
+// SET sum variable
+// SET iterator
+// GET input
+// WHILE iterator is less than or equal to input
+// --> increase the iterator
+// ----> IF iterator is mulitple of 3 or 5
+// ------> add the iterator to the sum variable
+// PRINT result of the sum variable
 
 function multisum(num) {
-  let result = 1;
-  let arr = [];
-
-  for (let i = num; i > result; i -= 1) {
-    arr.push(i);
-  }
-
-  return arr.reduce((prev, curr) => {
-    let val = 0;
-    if (prev % 3 === 0 || prev % 5 === 0) {
-      val = prev + curr;
+  let sum = 0;
+  for (let i = 0; i <= num; i += 1) {
+    if (i % 3 === 0 || i % 5 === 0) {
+      sum += i;
     }
-    return val;
-  }, result);
+  }
+  return sum;
 }
 
 console.log(multisum(3)); // 3
