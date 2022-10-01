@@ -280,7 +280,7 @@ function multisum(num) {
 // console.log(multisum(10)); // 33
 // console.log(multisum(1000)); // 234168
 
-// -------------------------------------->
+// <---------------------------------------------- *** -------------------------------------->
 // <---------------------------------------------- *** -------------------------------------->
 
 // Write a function that determines and returns the UTF-16 string value of a string passed in as an argument. The UTF-16 string value is the sum of the UTF-16 values of every character in the string. (You may use String.prototype.charCodeAt() to determine the UTF-16 value of a character.)
@@ -298,7 +298,20 @@ function utf16Value(str) {
   return utf16Arr.reduce((prev, curr) => prev + curr);
 }
 
-console.log(utf16Value("Four score")); // 984
-console.log(utf16Value("Launch School")); // 1251
-console.log(utf16Value("a")); // 97
-console.log(utf16Value("")); // 0
+// <---------------------------------------------- *** -------------------------------------->
+// BETTER VERSION
+
+function utf16ValueFunc(str) {
+  let sum = 0; // supplies us with starting value as well as addressing the empty string test case
+
+  for (let i = 0; i < str.length; i += 1) {
+    sum += str.charCodeAt(i);
+  }
+
+  return sum;
+}
+
+console.log(utf16ValueFunc("Four score")); // 984
+console.log(utf16ValueFunc("Launch School")); // 1251
+console.log(utf16ValueFunc("a")); // 97
+console.log(utf16ValueFunc("")); // 0
