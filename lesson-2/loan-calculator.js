@@ -46,11 +46,11 @@ prompt(`==> DURATION: ${lengthInMonths} months`);
 
 // Calculate monthly interest
 let annualRate = Number(interestRate) / 100;
-let monthlyRate = (annualRate / 12) * 100;
+let monthlyRate = annualRate / 12;
 
 // Calculate monthly payment
 let monthlyPayment =
   Number(principal) *
   (monthlyRate / (1 - Math.pow(1 + monthlyRate, -Number(lengthInMonths))));
 
-prompt(`Your monthly payment is $${monthlyPayment.toFixed(2)}`); // <- RETURNS '$20,833.33' which is the same as 'principal' * 'monthlyRate'.
+prompt(`Your monthly payment is $${monthlyPayment.toFixed(2)}`);
