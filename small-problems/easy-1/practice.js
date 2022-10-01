@@ -287,10 +287,14 @@ function multisum(num) {
 
 function utf16Value(str) {
   let utf16Arr = [];
+
+  if (str === "") return (utf16Arr[0] = 0);
+
   for (let i = 0; i < str.length; i += 1) {
     let utf16Char = str.charCodeAt(i);
     utf16Arr.push(utf16Char);
   }
+
   return utf16Arr.reduce((prev, curr) => prev + curr);
 }
 
