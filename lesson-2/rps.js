@@ -54,7 +54,7 @@ while (true) {
   while (!VALID_CHOICES.includes(shorthandChoice)) {
     prompt("Invalid choice. Please choose 'rock', 'paper', or 'scissors'");
     userChoice = readline.question();
-    getUserChoice(userChoice);
+    getUserChoice(userChoice); // <- LOOP NOT BREAKING WHEN NEW VALID ENTRY SUBMTITED AFTER SINGLE INSTANCE OF INVALID ENTRY
   }
 
   // Get computer choice
