@@ -54,14 +54,14 @@ while (true) {
   while (!VALID_CHOICES.includes(shorthandChoice)) {
     prompt("Invalid choice. Please choose 'rock', 'paper', or 'scissors'");
     userChoice = readline.question();
-    getUserChoice(userChoice); // <- LOOP NOT BREAKING WHEN NEW VALID ENTRY SUBMTITED AFTER SINGLE INSTANCE OF INVALID ENTRY
+    shorthandChoice = getUserChoice(userChoice);
   }
 
   // Get computer choice
   const RANDOM_CHOICE_INDEX = Math.floor(Math.random() * VALID_CHOICES.length);
   let computerChoice = VALID_CHOICES[RANDOM_CHOICE_INDEX];
 
-  playGame(userChoice, computerChoice);
+  playGame(shorthandChoice, computerChoice);
 
   // Offer to play again
   prompt("Would you like to play again (y/n)?");
