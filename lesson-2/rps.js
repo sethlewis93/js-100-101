@@ -1,5 +1,6 @@
 let readline = require("readline-sync");
 
+// Prompt the user for input
 function prompt(message) {
   console.log(`=> ${message}`);
 }
@@ -26,35 +27,40 @@ function playGame(userInput, computerInput) {
   }
 }
 
-function getUserChoice(input) {
+// Parse/interpret user's shorthand choice
+function parseUserChoice(input) {
   let shorthand = input[0].toLowerCase();
   switch (shorthand) {
     case "r":
-      return "rock";
+      shorthand = "rock";
+      break;
     case "p":
-      return "paper";
+      shorthand = "paper";
+      break;
     case "s":
-      return "scissors";
-
-    // may be room for default statement here
+      shorthand = "scissors";
+      break;
   }
+  return shorthand;
 }
 
-// <-------------------------------------------------- *** -------------------------------------------------->
-// <-------------------------------------------------- *** -------------------------------------------------->
+// <----------------------------- ** ----------------------------->
 
 while (true) {
-  // Get user input -- Update the program so the user can type "r" for "rock," "p" for "paper," and so on.
-  prompt("Rock, paper, or scissors: take your pick");
+  // Get user input
+  prompt("Let's play 'Rock, paper, scissors'!");
+  prompt("Enter 'r' for 'Rock', 'p' for 'Paper', or 's' for 'Scissors'!");
 
   let userChoice = readline.question();
-  let shorthandChoice = getUserChoice(userChoice);
+  let shorthandChoice = parseUserChoice(userChoice);
 
   // Validate user input
   while (!VALID_CHOICES.includes(shorthandChoice)) {
-    prompt("Invalid choice. Please choose 'rock', 'paper', or 'scissors'");
+    prompt(
+      "Invalid choice. Please enter 'r' for 'Rock', 'p' for 'Paper', or 's' for 'Scissors'"
+    );
     userChoice = readline.question();
-    shorthandChoice = getUserChoice(userChoice);
+    shorthandChoice = parseUserChoice(userChoice);
   }
 
   // Get computer choice
