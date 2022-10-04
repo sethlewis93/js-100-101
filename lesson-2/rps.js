@@ -26,25 +26,42 @@ function playGame(userInput, computerInput) {
   }
 }
 
+function getUserChoice(input) {
+  let shorthand = input[0].toLowerCase();
+  switch (shorthand) {
+    case "r":
+      return "rock";
+    case "p":
+      return "paper";
+    case "s":
+      return "scissors";
+
+    // may be room for default statement here
+  }
+}
+
 // <-------------------------------------------------- *** -------------------------------------------------->
 // <-------------------------------------------------- *** -------------------------------------------------->
 
 while (true) {
-  // Get user input
+  // Get user input -- Update the program so the user can type "r" for "rock," "p" for "paper," and so on.
   prompt("Rock, paper, or scissors: take your pick");
+
   let userChoice = readline.question();
+  let shorthandChoice = getUserChoice(userChoice);
 
   // Validate user input
-  while (!VALID_CHOICES.includes(userChoice)) {
+  while (!VALID_CHOICES.includes(shorthandChoice)) {
     prompt("Invalid choice. Please choose 'rock', 'paper', or 'scissors'");
     userChoice = readline.question();
+    shorthandChoice = getUserChoice(userChoice);
   }
 
   // Get computer choice
   const RANDOM_CHOICE_INDEX = Math.floor(Math.random() * VALID_CHOICES.length);
   let computerChoice = VALID_CHOICES[RANDOM_CHOICE_INDEX];
 
-  playGame(userChoice, computerChoice);
+  playGame(shorthandChoice, computerChoice);
 
   // Offer to play again
   prompt("Would you like to play again (y/n)?");
