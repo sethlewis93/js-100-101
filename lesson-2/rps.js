@@ -19,7 +19,7 @@ function playGame(userInput, computerInput) {
     (userInput === "paper" && computerInput === "rock") ||
     (userInput === "scissors" && computerInput === "paper")
   ) {
-    prompt("You win!");
+    prompt("You won this round!");
     userScore += 1;
     displayWinner(userScore, computerScore);
   } else if (
@@ -27,7 +27,7 @@ function playGame(userInput, computerInput) {
     (userInput === "paper" && computerInput === "scissors") ||
     (userInput === "scissors" && computerInput === "rock")
   ) {
-    prompt("Computer wins!");
+    prompt("The computer won this round!");
     computerScore += 1;
     displayWinner(userScore, computerScore);
   } else {
@@ -56,10 +56,10 @@ function parseUserChoice(input) {
 function displayWinner(userTotal, cpuTotal) {
   while (true) {
     if (userTotal === 3) {
-      prompt("User wins!");
+      prompt("User wins the game!");
       break;
     } else if (cpuTotal === 3) {
-      prompt("Computer wins!");
+      prompt("Computer wins the game!");
       break;
     }
   }
@@ -90,17 +90,19 @@ while (true) {
 
   playGame(shorthandChoice, computerChoice);
 
-  // Offer to play again
+  // Play again
+  prompt("Enter 'y' to play again to determine a winner or 'n' to quit.");
+
   // prompt("Would you like to play again (y/n)?");
-  // let answer = readline.question().toLowerCase();
+  let answer = readline.question().toLowerCase();
 
-  // while (answer[0] !== "y" && answer[0] !== "n") {
-  //   prompt("please answer 'y' or 'n'");
-  //   answer = readline.question().toLowerCase();
-  // }
+  while (answer[0] !== "y" && answer[0] !== "n") {
+    prompt("please answer 'y' or 'n'");
+    answer = readline.question().toLowerCase();
+  }
 
-  // if (answer[0] === "n") {
-  //   prompt("Goodbye!");
-  //   break;
-  // }
+  if (answer[0] === "n") {
+    prompt("Goodbye!");
+    break;
+  }
 }
