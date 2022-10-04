@@ -8,6 +8,10 @@ function prompt(message) {
 // Array of choices
 const VALID_CHOICES = ["rock", "paper", "scissors"];
 
+// Players' score count
+let userScore = 0;
+let computerScore = 0;
+
 // Game function
 function playGame(userInput, computerInput) {
   if (
@@ -16,14 +20,18 @@ function playGame(userInput, computerInput) {
     (userInput === "scissors" && computerInput === "paper")
   ) {
     prompt("You win!");
+    userScore += 1;
+    displayWinner(userScore, computerScore);
   } else if (
     (userInput === "rock" && computerInput === "paper") ||
     (userInput === "paper" && computerInput === "scissors") ||
     (userInput === "scissors" && computerInput === "rock")
   ) {
     prompt("Computer wins!");
+    computerScore += 1;
+    displayWinner(userScore, computerScore);
   } else {
-    prompt("It's a tie");
+    prompt("It's a tie! Please play again.");
   }
 }
 
@@ -42,6 +50,19 @@ function parseUserChoice(input) {
       break;
   }
   return shorthand;
+}
+
+// Display winner function
+function displayWinner(userTotal, cpuTotal) {
+  while (true) {
+    if (userTotal === 3) {
+      prompt("User wins!");
+      break;
+    } else if (cpuTotal === 3) {
+      prompt("Computer wins!");
+      break;
+    }
+  }
 }
 
 // <----------------------------- ** ----------------------------->
@@ -70,16 +91,16 @@ while (true) {
   playGame(shorthandChoice, computerChoice);
 
   // Offer to play again
-  prompt("Would you like to play again (y/n)?");
-  let answer = readline.question().toLowerCase();
+  // prompt("Would you like to play again (y/n)?");
+  // let answer = readline.question().toLowerCase();
 
-  while (answer[0] !== "y" && answer[0] !== "n") {
-    prompt("please answer 'y' or 'n'");
-    answer = readline.question().toLowerCase();
-  }
+  // while (answer[0] !== "y" && answer[0] !== "n") {
+  //   prompt("please answer 'y' or 'n'");
+  //   answer = readline.question().toLowerCase();
+  // }
 
-  if (answer[0] === "n") {
-    prompt("Goodbye!");
-    break;
-  }
+  // if (answer[0] === "n") {
+  //   prompt("Goodbye!");
+  //   break;
+  // }
 }
