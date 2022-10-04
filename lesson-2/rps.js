@@ -22,7 +22,6 @@ function playGame(userInput, computerInput) {
     prompt("You won this round!");
     userScore += 1;
     displayWinner(userScore, computerScore);
-    console.log(`User: ${userScore} - Computer: ${computerScore}`);
   } else if (
     (userInput === "rock" && computerInput === "paper") ||
     (userInput === "paper" && computerInput === "scissors") ||
@@ -31,7 +30,6 @@ function playGame(userInput, computerInput) {
     prompt("The computer won this round!");
     computerScore += 1;
     displayWinner(userScore, computerScore);
-    console.log(`User: ${userScore} - Computer: ${computerScore}`);
   } else {
     prompt("It's a tie! Please play again.");
   }
@@ -56,6 +54,7 @@ function parseUserChoice(input) {
 
 // Display winner function
 function displayWinner(userTotal, cpuTotal) {
+  console.log(`User: ${userScore} - Computer: ${computerScore}`);
   if (userTotal === 3) {
     prompt("==> USER WINS THE GAME! <==");
     endGame();
@@ -89,7 +88,7 @@ function playAgain() {
 
 // End the game
 function endGame() {
-  process.exit(1);
+  process.exit(0);
 }
 
 // <----------------------------- ** ----------------------------->
