@@ -27,6 +27,7 @@ function playGame(userInput, computerInput) {
 }
 
 // <-------------------------------------------------- *** -------------------------------------------------->
+// <-------------------------------------------------- *** -------------------------------------------------->
 
 while (true) {
   // Get user input
@@ -46,9 +47,13 @@ while (true) {
   playGame(userChoice, computerChoice);
 
   // Offer to play again
-  prompt("Would you like to play again?");
+  prompt("Would you like to play again (y/n)?");
   let answer = readline.question();
-  if (answer === "n") break; // <-- need to make this more robust
+
+  if (answer[0].toLowerCase() !== "y") {
+    prompt("Goodbye!");
+    break;
+  }
 }
 
 // We used a while loop with an always-true condition and a break statement to decide whether to replay the game. Can you rewrite the loop so that we don't need to use the break statement to stop the loop?
