@@ -22,6 +22,7 @@ function playGame(userInput, computerInput) {
     prompt("You won this round!");
     userScore += 1;
     displayWinner(userScore, computerScore);
+    console.log(`User: ${userScore} - Computer: ${computerScore}`);
   } else if (
     (userInput === "rock" && computerInput === "paper") ||
     (userInput === "paper" && computerInput === "scissors") ||
@@ -30,6 +31,7 @@ function playGame(userInput, computerInput) {
     prompt("The computer won this round!");
     computerScore += 1;
     displayWinner(userScore, computerScore);
+    console.log(`User: ${userScore} - Computer: ${computerScore}`);
   } else {
     prompt("It's a tie! Please play again.");
   }
@@ -54,15 +56,40 @@ function parseUserChoice(input) {
 
 // Display winner function
 function displayWinner(userTotal, cpuTotal) {
+  if (userTotal === 3) {
+    prompt("==> USER WINS THE GAME! <==");
+    endGame();
+  } else if (cpuTotal === 3) {
+    prompt("==> COMPUTER WINS THE GAME! <==");
+    endGame();
+  }
+}
+
+// Play again function
+function playAgain() {
   while (true) {
-    if (userTotal === 3) {
-      prompt("User wins the game!");
-      break;
-    } else if (cpuTotal === 3) {
-      prompt("Computer wins the game!");
+    prompt("Enter 'y' to play again to determine a winner or 'n' to quit.");
+
+    // prompt("Would you like to play again (y/n)?");
+    let answer = readline.question().toLowerCase();
+
+    while (answer[0] !== "y" && answer[0] !== "n") {
+      prompt("please answer 'y' or 'n'");
+      answer = readline.question().toLowerCase();
+    }
+
+    if (answer[0] === "n") {
+      prompt("Goodbye!");
+      endGame();
+    } else if (answer[0] === "y") {
       break;
     }
   }
+}
+
+// End the game
+function endGame() {
+  process.exit(1);
 }
 
 // <----------------------------- ** ----------------------------->
@@ -89,20 +116,5 @@ while (true) {
   let computerChoice = VALID_CHOICES[RANDOM_CHOICE_INDEX];
 
   playGame(shorthandChoice, computerChoice);
-
-  // Play again
-  prompt("Enter 'y' to play again to determine a winner or 'n' to quit.");
-
-  // prompt("Would you like to play again (y/n)?");
-  let answer = readline.question().toLowerCase();
-
-  while (answer[0] !== "y" && answer[0] !== "n") {
-    prompt("please answer 'y' or 'n'");
-    answer = readline.question().toLowerCase();
-  }
-
-  if (answer[0] === "n") {
-    prompt("Goodbye!");
-    break;
-  }
+  playAgain();
 }
