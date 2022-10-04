@@ -48,12 +48,15 @@ while (true) {
 
   // Offer to play again
   prompt("Would you like to play again (y/n)?");
-  let answer = readline.question();
+  let answer = readline.question().toLowerCase();
 
-  if (answer[0].toLowerCase() !== "y") {
+  while (answer[0] !== "y" && answer[0] !== "n") {
+    prompt("please answer 'y' or 'n'");
+    answer = readline.question().toLowerCase();
+  }
+
+  if (answer[0] === "n") {
     prompt("Goodbye!");
     break;
   }
 }
-
-// We used a while loop with an always-true condition and a break statement to decide whether to replay the game. Can you rewrite the loop so that we don't need to use the break statement to stop the loop?
