@@ -57,30 +57,35 @@ function displayWinner(userTotal, cpuTotal) {
   console.log(`User: ${userScore} - Computer: ${computerScore}`);
   if (userTotal === 3) {
     prompt("==> USER WINS THE GAME! <==");
-    endGame();
+    playAgain();
   } else if (cpuTotal === 3) {
     prompt("==> COMPUTER WINS THE GAME! <==");
-    endGame();
+    playAgain();
   }
 }
 
 // Play again function
 function playAgain() {
   while (true) {
-    prompt("Enter 'y' to play again to determine a winner or 'n' to quit.");
+    prompt("Enter 'y' to play again or 'n' to quit.");
 
     // prompt("Would you like to play again (y/n)?");
     let answer = readline.question().toLowerCase();
 
-    while (answer[0] !== "y" && answer[0] !== "n") {
+    while (
+      (answer[0] !== "y" || answer !== "yes") &&
+      (answer[0] !== "n" || answer !== "no")
+    ) {
       prompt("please answer 'y' or 'n'");
       answer = readline.question().toLowerCase();
     }
 
-    if (answer[0] === "n") {
+    if (answer[0] === "n" || answer === "no") {
       prompt("Goodbye!");
       endGame();
     } else if (answer[0] === "y") {
+      userScore = 0;
+      computerScore = 0;
       break;
     }
   }
@@ -110,10 +115,10 @@ while (true) {
     shorthandChoice = parseUserChoice(userChoice);
   }
 
-  // Get computer choice
+  // Get and show computer choice
   const RANDOM_CHOICE_INDEX = Math.floor(Math.random() * VALID_CHOICES.length);
   let computerChoice = VALID_CHOICES[RANDOM_CHOICE_INDEX];
+  prompt(`The computer chose: ${computerChoice}`);
 
   playGame(shorthandChoice, computerChoice);
-  playAgain();
 }
