@@ -5,8 +5,13 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-// Array of choices
-const VALID_CHOICES = ["rock", "paper", "scissors"];
+// Game choices
+const USER_CHOICES = {
+  r: "rock",
+  p: "paper",
+  s: "scissors",
+};
+const COMPUTER_CHOICES = ["rock", "paper", "scissors"];
 let shorthandChoice;
 let computerChoice;
 
@@ -16,24 +21,22 @@ let computerScore = 0;
 
 // Game function
 function playGame(userInput, computerInput) {
-  if (
-    (userInput === "rock" && computerInput === "scissors") ||
-    (userInput === "paper" && computerInput === "rock") ||
-    (userInput === "scissors" && computerInput === "paper")
-  ) {
+  const WINNING_MOVES = {
+    rock: "scissors",
+    paper: "rock",
+    scissors: "paper",
+  };
+
+  if (userInput === computerInput) {
+    prompt("It's a tie! Please play again.");
+  } else if (WINNING_MOVES[userInput] === computerInput) {
     prompt("You won this round!");
     userScore += 1;
     displayWinner(userScore, computerScore);
-  } else if (
-    (userInput === "rock" && computerInput === "paper") ||
-    (userInput === "paper" && computerInput === "scissors") ||
-    (userInput === "scissors" && computerInput === "rock")
-  ) {
+  } else {
     prompt("The computer won this round!");
     computerScore += 1;
     displayWinner(userScore, computerScore);
-  } else {
-    prompt("It's a tie! Please play again.");
   }
 }
 
@@ -48,15 +51,14 @@ function getUserInput() {
   return singleLetterChoice;
 }
 
-function getComputerChoice() {
-  const RANDOM_CHOICE_INDEX = Math.floor(Math.random() * VALID_CHOICES.length);
-  computerChoice = VALID_CHOICES[RANDOM_CHOICE_INDEX];
-  prompt(`The computer chose: ${computerChoice}`);
+// Parse/interpret user's shorthand choice
+function parseUserChoice(input) {
+  return USER_CHOICES[input];
 }
 
 function ValidateUserInput(input) {
-  input = getUserInput();
-  if (!VALID_CHOICES.includes(input)) {
+  if (input !== USER_CHOICES[input]) {
+    // <- NOT CURRENTLY VALIDATING ERRANT USER CHOICE
     prompt(
       "Invalid choice. Please enter 'r' for 'Rock', 'p' for 'Paper', or 's' for 'Scissors'"
     );
@@ -67,21 +69,12 @@ function ValidateUserInput(input) {
   }
 }
 
-// Parse/interpret user's shorthand choice
-function parseUserChoice(input) {
-  let shorthand = input[0].toLowerCase();
-  switch (shorthand) {
-    case "r":
-      shorthand = "rock";
-      break;
-    case "p":
-      shorthand = "paper";
-      break;
-    case "s":
-      shorthand = "scissors";
-      break;
-  }
-  return shorthand;
+function getComputerChoice() {
+  const RANDOM_CHOICE_INDEX = Math.floor(
+    Math.random() * COMPUTER_CHOICES.length
+  );
+  computerChoice = COMPUTER_CHOICES[RANDOM_CHOICE_INDEX];
+  prompt(`The computer chose: ${computerChoice}`);
 }
 
 // Display winner function
@@ -98,7 +91,6 @@ function displayWinner(userTotal, cpuTotal) {
 
 // Play again function
 function playAgain() {
-  // <- VALIDATION HERE STILL A LITTLE WONKY
   while (true) {
     prompt("Enter 'y' to play again or 'n' to quit.");
 
@@ -133,9 +125,12 @@ function endGame() {
 
 // <----------------------------- ** ----------------------------->
 
+// Only need to greet the user once
+greetUser();
+
 while (true) {
-  greetUser();
-  ValidateUserInput(); // getUserInput() nested within
+  let userSelection = getUserInput();
+  ValidateUserInput(USER_CHOICES[userSelection]);
   getComputerChoice();
   playGame(shorthandChoice, computerChoice);
 }

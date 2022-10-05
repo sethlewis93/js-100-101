@@ -56,22 +56,24 @@ function square(n) {
 
 // Write a program that prompts the user for two positive integers, and then prints the results of the following operations on those two numbers: addition, subtraction, product, quotient, remainder, and power. Do not worry about validating the input.
 
-let prompt = console.log;
+// let prompt = console.log;
 
-prompt("Enter the first number");
-let first = Number(readline.question());
+// prompt("Enter the first number");
+// let first = Number(readline.question());
 
-prompt("Enter the second number");
-let second = Number(readline.question());
+// prompt("Enter the second number");
+// let second = Number(readline.question());
 
-console.log(`
-  ==> ${first} + ${second} = ${first + second}
-  ==> ${first} - ${second} = ${first - second}
-  ==> ${first} * ${second} = ${first * second}
-  ==> ${first} / ${second} = ${parseInt(first / second)}
-  ==> ${first} % ${second} = ${first % second}
-  ==> ${first} ** ${second} = ${first ** second}
-`);
+// Remember that Math.floor() returns the integer less than or equal to it's numeric argument. It was the preferred choice over parseInt().
+
+// console.log(`
+//   ==> ${first} + ${second} = ${first + second}
+//   ==> ${first} - ${second} = ${first - second}
+//   ==> ${first} * ${second} = ${first * second}
+//   ==> ${first} / ${second} = ${Math.floor(first / second)}
+//   ==> ${first} % ${second} = ${first % second}
+//   ==> ${first} ** ${second} = ${first ** second}
+// `);
 
 // ==> Enter the first number:
 // 23
@@ -83,3 +85,34 @@ console.log(`
 // ==> 23 / 17 = 1
 // ==> 23 % 17 = 6
 // ==> 23 ** 17 = 1.4105003956066297e+23
+
+// <-------------------------------------------------- *** -------------------------------------------------->
+// <-------------------------------------------------- *** -------------------------------------------------->
+
+// Write a function that returns the next to last word in the String passed to it as an argument.
+
+function penultimate(str) {
+  const words = str.split(" ");
+  return words[words.length - 2];
+}
+
+// console.log(penultimate("last word") === "last"); // logs true
+// console.log(penultimate("Launch School is great!") === "is"); // logs true
+
+// <-------------------------------------------------- *** -------------------------------------------------->
+// <-------------------------------------------------- *** -------------------------------------------------->
+
+// In this exercise, you will write a function named xor that takes two arguments, and returns true if exactly one of its arguments is truthy, false otherwise. Note that we are looking for a boolean result instead of a truthy/falsy value as returned by || and &&.
+
+function xor(p1, p2) {
+  return (p1 && !p2) || (!p1 && p2);
+}
+
+// console.log(xor(5, 0) === true);
+// console.log(xor(false, true) === true);
+// console.log(xor(1, 1) === false);
+// console.log(xor(true, true) === false);
+console.log(xor(5, 0));
+console.log(xor(false, true));
+console.log(xor(1, 1));
+console.log(xor(true, true));
