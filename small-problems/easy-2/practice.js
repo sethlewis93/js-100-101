@@ -48,5 +48,38 @@ function square(n) {
   return multiply(n, n);
 }
 
-console.log(square(5) === 25); // logs true
-console.log(square(-8) === 64); // logs true
+// console.log(square(5) === 25); // logs true
+// console.log(square(-8) === 64); // logs true
+
+// <-------------------------------------------------- *** -------------------------------------------------->
+// <-------------------------------------------------- *** -------------------------------------------------->
+
+// Write a program that prompts the user for two positive integers, and then prints the results of the following operations on those two numbers: addition, subtraction, product, quotient, remainder, and power. Do not worry about validating the input.
+
+let prompt = console.log;
+
+prompt("Enter the first number");
+let first = Number(readline.question());
+
+prompt("Enter the second number");
+let second = Number(readline.question());
+
+console.log(`
+  ==> ${first} + ${second} = ${first + second}
+  ==> ${first} - ${second} = ${first - second}
+  ==> ${first} * ${second} = ${first * second}
+  ==> ${first} / ${second} = ${parseInt(first / second)}
+  ==> ${first} % ${second} = ${first % second}
+  ==> ${first} ** ${second} = ${first ** second}
+`);
+
+// ==> Enter the first number:
+// 23
+// ==> Enter the second number:
+// 17
+// ==> 23 + 17 = 40
+// ==> 23 - 17 = 6
+// ==> 23 * 17 = 391
+// ==> 23 / 17 = 1
+// ==> 23 % 17 = 6
+// ==> 23 ** 17 = 1.4105003956066297e+23
