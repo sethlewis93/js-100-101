@@ -11,13 +11,13 @@
 
 This summary, while being pure English, can be a map for you when coding your game. Let's see how:
 
-    - Inside your while loop, you can extract your logic into small helper functions to make your code more readable and maintainable:
+- Inside your while loop, you can extract your logic into small helper functions to make your code more readable and maintainable:
 
-        Lines 98-102: Can be extracted into a function called `getUserInput`. Notice how with this function , you won't need the comment on line 97 since the function name is very self-explanatory.
+  ~~Lines 98-102: Can be extracted into a function called `getUserInput`. Notice how with this function , you won't need the comment on line 97 since the function name is very self-explanatory.~~
 
-        Lines 104-111: Can be extracted into a function called `ValidateInput`. And again, this will help you get rid of the comment on line 104 because the function name explains clearly what it does.
+  ~~Lines 104-111: Can be extracted into a function called `ValidateInput`. And again, this will help you get rid of the comment on line 104 because the function name explains clearly what it does.~~
 
-        Lines 113-115: Can be extracted into a function called `getComputerChoice`.
+  ~~Lines 113-115: Can be extracted into a function called `getComputerChoice`.~~
 
 Notice how the above refactoring will lead to your while loop becoming something like:
 
