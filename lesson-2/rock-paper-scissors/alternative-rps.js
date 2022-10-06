@@ -91,30 +91,10 @@ function displayWinner(userTotal, cpuTotal) {
 
 // Play again function
 function playAgain() {
-  while (true) {
-    prompt("Enter 'y' to play again or 'n' to quit.");
-
-    // prompt("Would you like to play again (y/n)?");
-    let answer = readline.question().toLowerCase();
-
-    while (
-      answer !== "y" &&
-      answer !== "yes" &&
-      answer !== "n" &&
-      answer !== "no"
-    ) {
-      prompt("please answer 'y' or 'n'");
-      answer = readline.question().toLowerCase();
-    }
-
-    if (answer === "n" || answer === "no") {
-      prompt("Goodbye!");
-      endGame();
-    } else if (answer[0] === "y") {
-      userScore = 0;
-      computerScore = 0;
-      break;
-    }
+  prompt("Enter 'y' to play again or 'n' to quit.");
+  let answer = readline.question().toLowerCase();
+  while (answer !== "n" || answer !== "no") {
+    // <- HOW DO I START THE PROGRAM AGAIN FROM HERE? I SEE HOW I CAN END IT, BUT HOW WOULD IT BEGIN AGAIN?
   }
 }
 

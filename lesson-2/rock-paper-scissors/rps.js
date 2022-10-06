@@ -68,13 +68,13 @@ function displayWinner(userTotal, cpuTotal) {
 function playAgain() {
   while (true) {
     prompt("Enter 'y' to play again or 'n' to quit.");
-
-    // prompt("Would you like to play again (y/n)?");
     let answer = readline.question().toLowerCase();
 
     while (
-      (answer[0] !== "y" || answer !== "yes") &&
-      (answer[0] !== "n" || answer !== "no")
+      answer !== "y" &&
+      answer !== "yes" &&
+      answer !== "n" &&
+      answer !== "no"
     ) {
       prompt("please answer 'y' or 'n'");
       answer = readline.question().toLowerCase();
