@@ -306,6 +306,7 @@ function stringToSignedInteger(string) {
 // let whatType = integerToString(1234567890); // "1234567890"
 // console.log(typeof whatType);
 
+// see "integerToString.js" for code-commented version of this
 const DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 function integerToString(number) {
