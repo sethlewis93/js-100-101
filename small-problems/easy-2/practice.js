@@ -112,7 +112,99 @@ function xor(p1, p2) {
 // console.log(xor(false, true) === true);
 // console.log(xor(1, 1) === false);
 // console.log(xor(true, true) === false);
-console.log(xor(5, 0));
-console.log(xor(false, true));
-console.log(xor(1, 1));
-console.log(xor(true, true));
+// console.log(xor(5, 0));
+// console.log(xor(false, true));
+// console.log(xor(1, 1));
+// console.log(xor(true, true));
+
+// <-------------------------------------------------- *** -------------------------------------------------->
+// <-------------------------------------------------- *** -------------------------------------------------->
+
+// Write a function that returns an Array that contains every other element of an Array that is passed in as an argument. The values in the returned list should be those values that are in the 1st, 3rd, 5th, and so on elements of the argument Array.
+
+// INPUT = Array
+// OUTPUT = Array
+
+// PROBLEM RESTATED:
+// Return an arry where each element is the value of every other index of the original array beginning with index 0
+
+function oddities(arr) {
+  return arr.filter((el, index) => index % 2 === 0);
+}
+
+// console.log(oddities([2, 3, 4, 5, 6])); // logs [2, 4, 6]
+// console.log(oddities([1, 2, 3, 4, 5, 6])); // logs [1, 3, 5]
+// console.log(oddities(["abc", "def"])); // logs ['abc']
+// console.log(oddities([123])); // logs [123]
+// console.log(oddities([])); // logs []
+
+// <-------------------------------------------------- *** -------------------------------------------------->
+// <-------------------------------------------------- *** -------------------------------------------------->
+
+// Write a function that takes a string of digits and returns the appropriate number as an integer. You may not use any of the methods mentioned above.
+
+// For now, do not worry about leading + or - signs, nor should you worry about invalid characters; assume all characters will be numeric.
+
+// You may not use any of the standard conversion methods available in JavaScript, such as String() and Number(). Your function should do this the old-fashioned way and calculate the result by analyzing the characters in the string.
+
+// INPUT = String of digits
+// OUTPUT = Integer/Number
+
+// PROBLEM RESTATED:
+// Take a string of numeric characters and return the same characters as typeof 'number'
+
+// DATA JOURNEY:
+// String of digits -> Array of digits -> Number containing the same digits in order of string
+
+// ALGORITHM:
+/**
+ * Store numbers that correspond to digits in string
+ * Split each digit from the INPUT into an array of digits
+ * Create a variable `value` to act as a number that will be returned later
+ * Take each array item & add each string digit to the `value` variable
+ * Return `value`
+ */
+
+function stringToInteger(str) {
+  const DIGITS = {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+    9: 9,
+  };
+
+  // .split("") takes each digit and returns an array of digits AS STRINGS
+  // .map() takes each character and returns the NUMBER from the `DIGITS` obj that corresponds to the STRING from the .split() method
+  let arrayOfDigits = str.split("").map((char) => DIGITS[char]);
+  let value = 0;
+
+  // for each digit in the array:
+  // --> multiply the current `value` by 10
+  // --> add the digit to the `value`
+  // --> repeat for entire array
+  arrayOfDigits.forEach((digit) => (value = 10 * value + digit));
+  return value;
+}
+
+// // ORIGINAL SOLUTION (implicit coercion)
+// function stringToInteger(str) {
+//   return str * 1;
+// }
+
+// console.log(stringToInteger("4321") === 4321); // logs true
+// console.log(stringToInteger("570") === 570); // logs true
+
+// <-------------------------------------------------- *** -------------------------------------------------->
+// <-------------------------------------------------- *** -------------------------------------------------->
+
+// Write a function that takes a string of digits and returns the appropriate number as an integer. The string may have a leading + or - sign; if the first character is a +, your function should return a positive number; if it is a -, your function should return a negative number. If there is no sign, return a positive number.
+
+// You may assume the string will always contain a valid number.
+
+// You may not use any of the standard conversion methods available in JavaScript, such as parseInt() and Number(). You may, however, use the stringToInteger() function from the previous lesson.
