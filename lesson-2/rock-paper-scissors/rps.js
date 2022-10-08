@@ -98,9 +98,10 @@ function endGame() {
 
 // <----------------------------- ** ----------------------------->
 
+prompt("Let's play 'Rock, paper, scissors'!");
+
 while (true) {
   // Get user input
-  prompt("Let's play 'Rock, paper, scissors'!");
   prompt("Enter 'r' for 'Rock', 'p' for 'Paper', or 's' for 'Scissors'!");
 
   let userChoice = readline.question();
