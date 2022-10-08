@@ -208,3 +208,75 @@ function stringToInteger(str) {
 // You may assume the string will always contain a valid number.
 
 // You may not use any of the standard conversion methods available in JavaScript, such as parseInt() and Number(). You may, however, use the stringToInteger() function from the previous lesson.
+
+// INPUT = String of digits
+// OUTPUT = Number as an integer with the same digits, positive or negative depending on the presence of string chars "+" or "-"
+
+// PROBLEM RESTATED:
+// --> Given a string of digits and possibly the characters "+" or "-", convert that string to a number
+// --> If the string has a "+" character or only the digits:
+// ----> return the digits in order as a positive number
+// --> If the string has a "-" charcater:
+// ----> return the digits in order as a negative number
+
+// QUESTIONS:
+// --> What is a negative number in JS? How is it represented? Is it the same type as a positive number? Is it valid?
+// ----> > typeof -904 === 'number' returns true in Node
+
+// DATA TYPE:
+// String of digits and two characters -> Number
+
+// ALGORITHM:
+// Validate input:
+// --> If the string has "+":
+// ----> call stringToInteger as normal
+// ---> If te string has "-":
+// ----> convert and return the value from stringToInteger as negative number using `-Math.abs(val)`
+// --> Else: call stringToInteger
+
+// MY ORIGINAL SOLUTION
+function stringToSignedInteger(str) {
+  // Set variable to return at the end
+  let value = 0;
+
+  // Validate the input
+  if (str.includes("+")) {
+    value = stringToInteger(str.split("+")[1]);
+  } else if (str.includes("-")) {
+    value = -Math.abs(stringToInteger(str.split("-")[1]));
+  } else {
+    value = stringToInteger(str);
+  }
+  return value;
+}
+
+// console.log(stringToSignedInteger("4321") === 4321); // logs true
+// console.log(stringToSignedInteger("-570") === -570); // logs true
+// console.log(stringToSignedInteger("+100") === 100); // logs true
+
+// <-------------------------------------------------- *** -------------------------------------------------->
+
+// PROPOSED SOLUTION
+
+function stringToSignedInteger(str) {
+  switch (str[0]) {
+    case "-":
+      return -stringToInteger(str.slice(1, str.length));
+
+    case "+":
+      return stringToInteger(str.slice(1, str.length));
+
+    default:
+      return stringToInteger(str);
+  }
+}
+
+// console.log(stringToSignedInteger("4321") === 4321); // logs true
+// console.log(stringToSignedInteger("-570") === -570); // logs true
+// console.log(stringToSignedInteger("+100") === 100); // logs true
+
+// INTERESTING STUDENT SOLUTION (awaiting reply on the explanation (https://launchschool.com/exercises/6974d7f2))
+
+function stringToSignedInteger(string) {
+  return Math.floor(string);
+}
