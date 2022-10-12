@@ -14,5 +14,3 @@ function integerToString(int) {
 
   return result;
 }
-
-console.log(typeof integerToString(4321));

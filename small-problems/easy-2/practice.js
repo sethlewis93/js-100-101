@@ -321,3 +321,60 @@ function integerToString(number) {
 
   return result;
 }
+
+// <-------------------------------------------------- *** -------------------------------------------------->
+// <-------------------------------------------------- *** -------------------------------------------------->
+
+// In the previous exercise, you developed a function that converts non-negative numbers to strings. In this exercise, you're going to extend that function by adding the ability to represent negative numbers as well.
+
+// Write a function that takes an integer and converts it to a string representation.
+
+// You may not use any of the standard conversion functions available in JavaScript, such as String() and Number.prototype.toString(). You may, however, use integerToString() from the previous exercise.
+
+// You might also want to check the Math.sign() function.
+
+// INPUT = integer
+// OUTPUT = string
+
+// PROBLEM RESTATED:
+// --> Receive an integer and return a string representation of that integer prepended with a "+" sign if the integer is positive, a "-" if the integer is negative, or no sign preopended if the integer is "0" or "-0".
+// --> Use the `integerToString()` from the previous exercise
+
+// DATA TYPE
+// --> Number => String
+
+// ALGORITHM
+// Set a string var `signedString` to be returned at the end
+// If the integer is positive: set `signedString` to the return value of integerToString() with a "+" prepended to the function's return value
+// If the integer is negative: set `signedString` to the return value of integerToString() with a "-" prepeneded to the function's return value
+// If the integer is 0 or -0: set `signedString` to the return value of integerToString() as normal
+// Return the string prepended with the appropriate sign as applicable
+
+// CODE
+
+function signedIntegerToString(int) {
+  let signedString = "";
+
+  switch (int) {
+    case Math.sign(int) === 1:
+      signedString = `+${integerToString(int)}`;
+      break;
+    case Math.sign(int) === -1:
+      signedString = `-${integerToString(int)}`;
+      break;
+    case Math.sign(int) === 0:
+      signedString = integerToString(int);
+      break;
+  }
+
+  return signedString;
+}
+
+// returning undefined
+console.log(signedIntegerToString(4321));
+console.log(signedIntegerToString(-123));
+console.log(signedIntegerToString(0));
+
+// console.log(signedIntegerToString(4321) === "+4321");
+// console.log(signedIntegerToString(-123) === "-123");
+// console.log(signedIntegerToString(0) === "0");
