@@ -14,3 +14,6 @@ function integerToString(int) {
 
   return result;
 }
+
+console.log(integerToString(4321));
+console.log(integerToString(-123));

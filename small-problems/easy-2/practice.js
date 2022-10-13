@@ -352,29 +352,33 @@ function integerToString(number) {
 
 // CODE
 
+// --> MY SOLUTION (originally tried switch statement)
+// function signedIntegerToString(int) {
+//   let signedString = "";
+
+//   if (Math.sign(int) === 1) {
+//     signedString = `+${integerToString(int)}`;
+//   } else if (Math.sign(int) === -1) {
+//     signedString = `-${integerToString(Math.abs(int))}`;
+//   } else {
+//     signedString = integerToString(int);
+//   }
+//   return signedString;
+// }
+
+// --> PREPARED SOLUTION
 function signedIntegerToString(int) {
-  let signedString = "";
-
-  switch (int) {
-    case Math.sign(int) === 1:
-      signedString = `+${integerToString(int)}`;
-      break;
-    case Math.sign(int) === -1:
-      signedString = `-${integerToString(int)}`;
-      break;
-    case Math.sign(int) === 0:
-      signedString = integerToString(int);
-      break;
+  // My solution's original switch statement: "switch(int) { ..."
+  switch (Math.sign(int)) {
+    case -1:
+      return `-${integerToString(-int)}`;
+    case 1:
+      return `+${integerToString(int)}`;
+    default:
+      return integerToString(int);
   }
-
-  return signedString;
 }
 
-// returning undefined
-console.log(signedIntegerToString(4321));
-console.log(signedIntegerToString(-123));
-console.log(signedIntegerToString(0));
-
-// console.log(signedIntegerToString(4321) === "+4321");
-// console.log(signedIntegerToString(-123) === "-123");
-// console.log(signedIntegerToString(0) === "0");
+console.log(signedIntegerToString(4321) === "+4321");
+console.log(signedIntegerToString(-123) === "-123");
+console.log(signedIntegerToString(0) === "0");
