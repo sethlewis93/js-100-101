@@ -85,10 +85,23 @@ let table = { field1: 1, field2: 2, field3: 3, field4: 4 }; // false
 // Back in the stone age (before CSS), we used spaces to align things on the screen. If we have a 40-character wide table of Flintstone family members, how can we center the following title above the table with spaces?
 
 // ALGORITHM
-//
+// Determine the padding value needed by subtracting the lengh of the string from the space on table then dividing that by 2.
+// Pad the string to the left with the value determined in step 1.
 
 let title = "Flintstone Family Members"; // 25 chars
 
 let padding = Math.floor((40 - title.length) / 2);
 
-console.log(title.padStart(padding + title.length));
+// console.log(title.padStart(padding + title.length));
+
+// Write a one-line expression to count the number of lower-case t characters in each of the following strings:
+
+let statement1 = "The Flintstones Rock!";
+let statement2 = "Easy come, easy go.";
+
+// MY SOLUTION
+let count = [...statement1.matchAll("t")].length;
+
+// PREFERRED SOLUTION
+statement1.split("").filter((char) => char === "t").length;
+statement2.split("").filter((char) => char === "t").length;
