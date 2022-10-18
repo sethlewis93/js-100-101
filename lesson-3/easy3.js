@@ -1,4 +1,4 @@
-// Question 1
+// QUESTION 1
 
 // Write three different ways to remove all of the elements from the following array:
 
@@ -22,13 +22,13 @@ numbers.splice(0, numbers.length);
 // --> PREFERRED SOLUTIONS <--
 numbers.lengh = 0; // This was the one I missed. No need to use both .pop() and .shift() above
 
-// Question 2
+// QUESTION 2
 
 // What will the following code output?
 
 console.log([1, 2, 3] + [4, 5]);
 
-// Question 3
+// QUESTION 3
 
 // What will the following code output?
 
@@ -37,7 +37,7 @@ let str2 = str1;
 str2 = "goodbye!";
 console.log(str1);
 
-// Question 4
+// QUESTION 4
 
 // What will the following code output?
 
@@ -54,3 +54,41 @@ console.log(arr1);
 
 // !--> EXPLAIN THIS ☝🏾 IN YOUR OWN WORDS <--!
 //  (see easy3-q4.js for the answer key)
+
+// QUESTION 5
+
+// The following function unnecessarily uses two return statements to return boolean values. Can you rewrite this function so it only has one return statement and does not explicitly use either true or false?
+
+function isColorValid(color) {
+  if (color === "blue" || color === "green") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Try to come up with at least two different solutions.
+
+// --> MY SOLUTION <--
+function isColorValid(color) {
+  return color === "blue" || color === "green";
+}
+
+function isColorValid(color) {
+  switch (color) {
+    case "blue" || "green":
+      return color;
+    default:
+      break;
+  }
+}
+
+// --> CORRECT SOLUTION <--
+
+// We can also use an arrow function to simplify the code even more:
+
+const isColorValid = (color) => color === "blue" || color === "green";
+
+// Another tweak you can make is to use the Array.prototype.includes method; this works especially well when you have more than 2 choices:
+
+const isColorValid = (color) => ["blue", "green"].includes(color);
