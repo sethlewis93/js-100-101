@@ -6,9 +6,9 @@
 
 const readline = require("readline-sync");
 
-let firstNum = readline.question(`Please enter the first number `);
+let firstNum = parseInt(readline.question(`Please enter the first number `));
 
-let secondNum = readline.question(`Please enter the second number `);
+let secondNum = parseInt(readline.question(`Please enter the second number `));
 
 let operation =
   readline.question(`Please select the operation you'd like to perform. Select:
@@ -21,7 +21,7 @@ let operation =
 function performOperation(userChoice) {
   switch (parseInt(userChoice)) {
     case 1:
-      console.log(parseInt(firstNum) + parseInt(secondNum));
+      console.log(firstNum + secondNum);
       break;
     case 2:
       console.log(firstNum - secondNum);
