@@ -5,9 +5,12 @@
 // Print the result to the terminal.
 
 const readline = require("readline-sync");
+
 function isInvalidNumber(num) {
   return num.trimStart() === "" || Number.isNaN(Number(num));
 }
+
+/** START PROGRAM */
 
 let firstNum = readline.question(`Please enter the first number `);
 
@@ -32,21 +35,30 @@ let operation =
     "4" for Division;
 `);
 
+/** Validate operation selection */
+
+while (!["1", "2", "3", "4"].includes(operation)) {
+  console.log("Please enter an operation using the numbers 1 through 4");
+  operation = readline.question();
+}
+
 function performOperation(userChoice) {
-  switch (parseInt(userChoice)) {
-    case 1:
+  switch (userChoice) {
+    case "1":
       console.log(Number(firstNum) + Number(secondNum));
       break;
-    case 2:
+    case "2":
       console.log(Number(firstNum) - Number(secondNum));
       break;
-    case 3:
+    case "3":
       console.log(Number(firstNum) * Number(secondNum));
       break;
-    case 4:
+    case "4":
       console.log(Number(firstNum) / Number(secondNum));
       break;
   }
 }
 
 performOperation(operation);
+
+/** END PROGRAM */
