@@ -5,10 +5,24 @@
 // Print the result to the terminal.
 
 const readline = require("readline-sync");
+function isInvalidNumber(num) {
+  return num.trimStart() === "" || Number.isNaN(Number(num));
+}
 
-let firstNum = parseInt(readline.question(`Please enter the first number `));
+let firstNum = readline.question(`Please enter the first number `);
 
-let secondNum = parseInt(readline.question(`Please enter the second number `));
+/** Perform input validation */
+while (isInvalidNumber(firstNum)) {
+  console.log("Please enter a valid number");
+  firstNum = readline.question(`Please enter the first number `);
+}
+
+let secondNum = readline.question(`Please enter the second number `);
+
+while (isInvalidNumber(secondNum)) {
+  console.log("Please enter a valid number");
+  secondNum = readline.question(`Please enter the second number `);
+}
 
 let operation =
   readline.question(`Please select the operation you'd like to perform. Select:
@@ -21,16 +35,16 @@ let operation =
 function performOperation(userChoice) {
   switch (parseInt(userChoice)) {
     case 1:
-      console.log(firstNum + secondNum);
+      console.log(Number(firstNum) + Number(secondNum));
       break;
     case 2:
-      console.log(firstNum - secondNum);
+      console.log(Number(firstNum) - Number(secondNum));
       break;
     case 3:
-      console.log(firstNum * secondNum);
+      console.log(Number(firstNum) * Number(secondNum));
       break;
     case 4:
-      console.log(firstNum / secondNum);
+      console.log(Number(firstNum) / Number(secondNum));
       break;
   }
 }
