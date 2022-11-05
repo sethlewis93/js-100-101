@@ -36,11 +36,16 @@
 // --> Print it on a new line.
 
 // CODE:
-let iterator = 0;
-while (iterator < 10) {
-  console.log("Flint");
-  iterator += 1;
+
+function displayString(str) {
+  let iterator = 0;
+  while (iterator < 10) {
+    console.log(str);
+    iterator += 1;
+  }
 }
+
+displayString("Flintstones Rock");
 
 // --> MY SOLUTION(S) <--
 
