@@ -4,14 +4,30 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-prompt("What is the principal of the loan?");
-let principalAmount = readline.question();
+// EDGE CASES:
+// 1.) Symobls (like $) at the beginning of string
+// 2.) Symbols after numerical values (like % or "months")
+function isInvalidInput(input) {
+  return input.trimStart() === "" || Number.isNaN(Number(input));
+}
 
-prompt("What is the duration of the loan in months?");
-let loanDuration = readline.question();
+while (true) {
+  prompt("What is the principal of the loan?");
+  let principalAmount = readline.question();
 
-prompt("What is the interest rate (APY)?");
-let annualInterestRate = readline.question();
+  // Validation code here
+  while (isInvalidInput(principalAmount)) {
+    prompt("Please enter a number with no symbols at the beginning");
+    principalAmount = readline.question();
+  }
+
+  prompt("What is the duration of the loan in months?");
+  let loanDuration = readline.question();
+
+  prompt("What is the interest rate (APY)?");
+  let annualInterestRate = readline.question();
+}
+
 /** CALC FORMULA */
 
 let monthlyInterestRate = annualInterestRate / 100 / 12;
