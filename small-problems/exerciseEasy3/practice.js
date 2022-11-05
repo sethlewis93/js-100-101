@@ -77,6 +77,7 @@ function crunch(string) {
     if (string[index] !== string[index + 1]) {
       crunchedString += string[index];
     }
+
     index += 1;
   }
   return crunchedString;
@@ -88,7 +89,7 @@ console.log(crunch("a"));
 console.log(crunch(""));
 
 // What happens if we stop iterating when index is equal to string.length - 1?
-//  -> Not sure. Reached out to community for help.
+//  -> See "Easy3-1.md" for answer & study notes.
 // <-------------------------------- *** ------------------------>
 // <-------------------------------- *** ------------------------>
 
