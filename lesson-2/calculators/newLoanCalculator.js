@@ -31,8 +31,8 @@ while (true) {
     loanDuration = readline.question();
   }
 
-  // Interest Rate (APY) & validation
-  prompt("What is the interest rate (APY)?");
+  // Interest Rate (APR) & validation
+  prompt("What is the interest rate (APR)?");
   let annualInterestRate = readline.question();
 
   while (isInvalidInput(annualInterestRate)) {
