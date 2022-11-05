@@ -7,7 +7,7 @@ function prompt(message) {
 }
 
 function isInvalidInput(input) {
-  return input.trimStart() === "" || Number.isNaN(Number(input));
+  return input.trimStart() === "" || input < 0 || Number.isNaN(Number(input));
 }
 
 while (true) {
