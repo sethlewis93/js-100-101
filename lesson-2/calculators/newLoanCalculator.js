@@ -1,6 +1,7 @@
 // Re-doing calc exercise for review.
 
 let readline = require("readline-sync");
+
 function prompt(message) {
   console.log(`=> ${message}`);
 }
@@ -48,14 +49,7 @@ while (true) {
 
   console.log(`Your monthly payment is $${monthlyPayment.toFixed(2)}`);
 
-  // Receive a second calculation
-  // Ask the user whether they'd like to complete another calculation.
-  // SET their response to an `answer` variable.
-  // --> Evaluate input: is it either 'y' or 'n'?
-  // ----> If it is invalid, prompt the user to re-enter
-  // ----> Set user's reentry to `answer`
-  // --> IF !"yes"/"y": break the loop
-
+  // Restart or exit?
   prompt(
     "Would you like to do another calculation? Enter 'yes' or 'y' to continue"
   );
