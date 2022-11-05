@@ -47,5 +47,26 @@ while (true) {
       (1 - Math.pow(1 + monthlyInterestRate, -loanDuration)));
 
   console.log(`Your monthly payment is $${monthlyPayment.toFixed(2)}`);
-  break;
+
+  // Receive a second calculation
+  // Ask the user whether they'd like to complete another calculation.
+  // SET their response to an `answer` variable.
+  // --> Evaluate input: is it either 'y' or 'n'?
+  // ----> If it is invalid, prompt the user to re-enter
+  // ----> Set user's reentry to `answer`
+  // --> IF !"yes"/"y": break the loop
+
+  prompt(
+    "Would you like to do another calculation? Enter 'yes' or 'y' to continue"
+  );
+  let answer = readline.question().toLowerCase();
+
+  // Validate user response
+  if (answer[0] !== "n" && answer[0] !== "y") {
+    prompt("Please enter 'yes' or 'y' to continue or 'no' or 'n' to exit");
+    answer = readline.question.toLowerCase();
+  }
+
+  // Terminate program
+  if (answer[0] === "n") break;
 }
