@@ -82,10 +82,14 @@ let table = { field1: 1, field2: 2, field3: 3, field4: 4 }; // false
 // console.log(Array.isArray(newNumbers));
 // console.log(Array.isArray(table));
 
-// Back in the stone age (before CSS), we used spaces to align things on the screen. If we have a 40-character wide table of Flintstone family members, how can we center the following title above the table with spaces?
+// Back in the stone age, we used spaces to align things on the screen.
+// If we have a 40-character wide table of Flintstone family members,
+// how can we center the following title above the table with spaces?
 
 // ALGORITHM
-// Determine the padding value needed by subtracting the lengh of the string from the space on table then dividing that by 2.
+// Determine the padding value needed by...
+// ...subtracting the lengh of the string from the space on table...
+// ...then dividing that by 2.
 // Pad the string to the left with the value determined in step 1.
 
 let title = "Flintstone Family Members"; // 25 chars
