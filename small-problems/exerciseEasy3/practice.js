@@ -27,31 +27,70 @@
 
 // 1.) Iterate over each character
 // 2.) Check whether those characters are preceded by the same character
-// --> 3.) If so, remove all but the initial occurence
+// --> 3.) If so, only include the initial occurence in the new string.
 // --> Return the results
 
-// CODE:
+// CODE (FIRST TRY - Data types String -> Array -> String):
 
-let daily = "ddaaiillyy ddoouubbllee".split("");
+// let daily = "ddaaiillyy ddoouubbllee".split("");
 
-let newString = "";
+// let newString = "";
 
-// Currently still returns the original string
-daily.forEach((char) => {
-  if (char !== char - 1) {
-    newString += char;
-  }
-});
-console.log(newString);
+// daily.forEach((char) => {
+//   if (char !== char - 1) {
+//     // running into problems here.
+//     newString += char;
+//   }
+// });
 
 // --> MY SOLUTION(S) <--
 
-// solution code
+// Does not return required, crunched string.
+function myCrunch(string) {
+  let newStr = "";
 
-// --> PREFERRED SOLUTION(S) <--
+  string = string.split("");
 
-// <---------------------- *** -------------->
-// <---------------------- *** -------------->
+  string.forEach((char, index) => {
+    index = 0;
+    while (index < string.length) {
+      if (char[index] !== char[index + 1]) {
+        newStr += char[index];
+      }
+      index += 1;
+    }
+  });
+
+  return newStr;
+}
+
+myCrunch("4444abcabccba");
+
+// --> PREFERRED SOLUTION(S) - No data type changes <--
+
+function crunch(string) {
+  let index = 0;
+  let crunchedString = "";
+
+  while (index <= string.length - 1) {
+    // The result is the same whether or not we use "- 1"...why?
+    if (string[index] !== string[index + 1]) {
+      crunchedString += string[index];
+    }
+    index += 1;
+  }
+  return crunchedString;
+}
+
+console.log(crunch("4444abcabccba"));
+console.log(crunch("ddaaiillyy ddoouubbllee"));
+console.log(crunch("a"));
+console.log(crunch(""));
+
+// What happens if we stop iterating when index is equal to string.length - 1?
+//  -> Not sure. Reached out to community for help.
+// <-------------------------------- *** ------------------------>
+// <-------------------------------- *** ------------------------>
 
 // QUESTION #
 
