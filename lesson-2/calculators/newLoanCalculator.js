@@ -12,18 +12,25 @@ function isInvalidInput(input) {
 }
 
 while (true) {
+  // Principal & validation
   prompt("What is the principal of the loan?");
   let principalAmount = readline.question();
 
-  // Validation code here
   while (isInvalidInput(principalAmount)) {
-    prompt("Please enter a number with no symbols at the beginning");
+    prompt("Please enter a number with no symbols or other characters");
     principalAmount = readline.question();
   }
 
+  // Duration & validation
   prompt("What is the duration of the loan in months?");
   let loanDuration = readline.question();
 
+  while (isInvalidInput(loanDuration)) {
+    prompt("Please enter a number with no symbols or other characters");
+    loanDuration = readline.question();
+  }
+
+  // Interest Rate (APY) & validation
   prompt("What is the interest rate (APY)?");
   let annualInterestRate = readline.question();
 }
