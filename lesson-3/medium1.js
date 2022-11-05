@@ -52,9 +52,11 @@
 // Set " " padding
 // Log the value
 
-let flintstones = "Flintstones Rock!";
-console.log(flintstones);
-console.log(flintstones.padStart(flintstones.length + 1, " "));
+function padString(str) {
+  return str.padStart(str.length + 1, " ");
+}
+console.log("Flintstones Rock!");
+console.log(padString("Flintstones Rock!"));
 
 // --> MY SOLUTION(S) <--
 
