@@ -86,6 +86,10 @@ console.log(factorsSoltution(40)); // returns [1,2,4,5,8,10,20,40]
 console.log(factorsSoltution(0)); // returns empty array
 console.log(factorsSoltution(-40)); // returns empty array
 
+// Bonus: What is the purpose of number % divisor === 0 in that code?
+// --> It determins wether `divisor` is an integer. If it is an integer, it
+// --> can be evenly divided into `number` and is therefor a factor.
+
 // LESSON LEARNED:
 
 // don't check for the conditions of multiple variables when checking for one
