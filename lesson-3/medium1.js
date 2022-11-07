@@ -49,17 +49,25 @@
 
 let myString = "The Flintstones Rock!";
 let counter = 10;
-let padding = 0;
+let indent = 0;
 
-while (counter > 0 && padding < 10) {
-  console.log(myString.padStart(myString.length + padding, " "));
+while (counter > 0 && indent < 10) {
+  console.log(myString.padStart(myString.length + indent, " "));
   counter -= 1;
-  padding += 1;
+  indent += 1;
 }
 
-// solution code
-
 // --> PREFERRED SOLUTION(S) <--
+
+for (let padding = 1; padding <= 10; padding++) {
+  console.log(" ".repeat(padding) + "The Flintstones Rock!");
+}
+
+// LESSON LEARNED: Read the docs (MDN) more carefully.
+// --> I breifly searched for String or Array methods that do what repeat() does
+// --> but because it was near the end of my study time + I was tired, I didn't
+// --> look as carefully as I should have. My solution works, but the preferred
+// --> solution is more concise.
 
 // <---------------------- *** -------------->
 // <---------------------- *** -------------->
