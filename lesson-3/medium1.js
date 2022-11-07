@@ -37,28 +37,25 @@
 
 // CODE:
 
-// function displayString(str) {
-//   let iterator = 0;
-//   while (iterator < 10) {
-//     console.log(str);
-//     iterator += 1;
-//   }
-// }
-
-// displayString("Flintstones Rock");
-
-// Add JUST ONE indentation to ALL strings:
-// --> Get string target length (str.length + 1)
-// Set " " padding
-// Log the value
-
-function padString(str) {
-  return str.padStart(str.length + 1, " ");
-}
-console.log("Flintstones Rock!");
-console.log(padString("Flintstones Rock!"));
+// SET string
+// SET counter
+// Set padding length (string length + padding)
+// WHILE counter greater than target number AND padding less than target
+// --> PRINT string with padding === length of string + spaces to pad
+// --> Decrement counter
+// --> Increment padding
 
 // --> MY SOLUTION(S) <--
+
+let myString = "The Flintstones Rock!";
+let counter = 10;
+let padding = 0;
+
+while (counter > 0 && padding < 10) {
+  console.log(myString.padStart(myString.length + padding, " "));
+  counter -= 1;
+  padding += 1;
+}
 
 // solution code
 
