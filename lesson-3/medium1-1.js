@@ -64,6 +64,7 @@ for (let padding = 1; padding <= 10; padding++) {
 }
 
 // LESSON LEARNED: Read the docs (MDN) more carefully.
+
 // --> I breifly searched for String or Array methods that do what repeat() does
 // --> but because it was near the end of my study time + I was tired, I didn't
 // --> look as carefully as I should have. My solution works, but the preferred

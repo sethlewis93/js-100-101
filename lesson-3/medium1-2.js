@@ -33,7 +33,7 @@ let munstersDescription = "The Munsters are creepy and spooky.";
 // --> ELSE, just add it to the new string as-is.
 // RETURN the new string.
 
-// CODE:
+// CODE (doesn't work - string remains unaffected):
 
 // Check whether character is a letter.
 function charIsLetter(char) {
@@ -69,6 +69,35 @@ for (let counter = 0; counter < munstersDescription.length; counter += 1) {
 // solution code
 
 // --> PREFERRED SOLUTION(S) <--
+
+// Algo (in short):
+// 1.) Return an array with string elements,
+// 2.) Evaluate each element:
+// ----> if the element is uppercase, swap to lowercase & vice-versa.
+// 3.) Join the array elements and return a new string.
+
+console.log(
+  munstersDescription
+    .split("")
+    .map(function (char) {
+      if (char === char.toUpperCase()) {
+        return char.toLowerCase();
+      } else {
+        return char.toUpperCase();
+      }
+    })
+    .join("")
+);
+
+// LESSON LEARNED: (Again) - read MDN slowly and carefully.
+
+// A solution that took me nearly 30 lines of code required 11 for the solution.
+// This is because I was creating my own methods to do what .map() and .join()
+// do natively.
+// I SUSPECTED .map() WOULD BE HELPFUL HERE. But instead of DIGGING INTO MDN,
+// I GLANCED/skimmed over and went on too quickly.. bad habits from time at
+// Team Treehouse where the methods you needed to know were hinted at the
+// beginning of the module.
 
 // <---------------------- *** -------------->
 // <---------------------- *** -------------->
