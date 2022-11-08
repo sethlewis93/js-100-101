@@ -1,4 +1,4 @@
-// QUESTION #
+// QUESTION #4
 
 // Instructions
 
@@ -28,11 +28,6 @@
 // .push() does this by nature because it is non-mutating.
 // .concat() does this because the code reassigns the returned array
 // to the the original reference to `buffer`.
-
-// --> PREFERRED SOLUTION(S) <--
-
-// <---------------------- *** -------------->
-// <---------------------- *** -------------->
 
 function addToRollingBuffer1(buffer, maxBufferSize, newElement) {
   buffer.push(newElement);
@@ -78,3 +73,23 @@ console.log(addToRollingBuffer2([1, 2, 3, 4], 4, "my string")); // [ 2, 3, 4, 'm
 // If true, on line 3, the first element of the array is removed and returned.
 
 // On line 5, `buffer` is returned.
+
+// --> PREFERRED SOLUTION(S) <--
+
+// CORRECT ANSWER: There IS a difference:
+
+// While both functions have the same return value,
+// the first implementation mutates the argument represented by buffer..
+// ..the caller will see that the array is different when the function returns.
+// The rollingBuffer2 implementation doesn't mutate the argument
+// specified by the value of buffer.
+
+// lESSON LEARNED:
+
+// I alluded to the fact of mutation in my first explanation. I thought that the
+// RESULT of the test cases was what the question was asking.
+// Turns out, the question is about ANY differences outside of thos stated.
+// Next time if there's a difference: say so!
+
+// <---------------------- *** -------------->
+// <---------------------- *** -------------->
