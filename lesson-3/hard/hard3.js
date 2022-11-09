@@ -1,6 +1,45 @@
 // QUESTION #3
 
+// LESSONS LEARNED:
+
+// Shadowing:
+
+// Since inner scope has access to outer scope, we essentially have two LOCAL variables
+// named `one`, `two`, and `three`.
+// Because of this, access to the GLOBAL vars is blocked. This means that the LOCAL REASSIGNMENTS will not have any affect.
+// That said, the MUTATION in example "C" DOES IMPACT the object that the GLOBAL `one` points to.
+
+// <---------------------- *** -------------->
+// <---------------------- *** -------------->
+
 // Given the following similar sets of code, what will each code snippet print?
+
+// --> PREFERRED SOLUTION(S) <--
+
+// CORRECT ANSWERS:
+
+// A)
+
+// "one is: one"
+// "two is: two"
+// "three is: three"
+
+// B)
+
+// "one is: one"
+// "two is: two"
+// "three is: three"
+
+// C)
+
+// "one is: two"
+// "two is: three"
+// "three is: one"
+
+// <---------------------- *** -------------->
+// <---------------------- *** -------------->
+
+// MY SOLUTION
 
 // A)
 
@@ -95,28 +134,6 @@ console.log(`three is: ${three}`); // ["one"]
 // --> one = ["two"] because the .slice() method replaces ["one"] with ["two"]
 // --> two = ["three"] because the .slice() method replaces ["two"] with ["three"]
 // --> three = ["one"] because the .slice() method replaces ["three"] with ["one"]
-
-// --> PREFERRED SOLUTION(S) <--
-
-// CORRECT ANSWERS:
-
-// A)
-
-// "one is: one"
-// "two is: two"
-// "three is: three"
-
-// B)
-
-// "one is: one"
-// "two is: two"
-// "three is: three"
-
-// C)
-
-// "one is: two"
-// "two is: three"
-// "three is: one"
 
 // <---------------------- *** -------------->
 // <---------------------- *** -------------->
