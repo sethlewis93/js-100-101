@@ -24,6 +24,10 @@ let books = [
 // ---- if key === published, sort keys (a - b)
 
 // Access and store the book object and the value on each published key
-books.forEach((bookObj) => console.log(bookObj["published"]));
+// books.forEach((bookObj) => console.log(bookObj["published"]));
+let sortedBooks = books.map((bookObj) => {
+  return Object.keys(bookObj).filter((key) => bookObj[key]);
+});
 
-console.log(books[0]["published"]); // => 1967
+console.log(sortedBooks);
+// console.log(books[0]["published"]); // => 1967
