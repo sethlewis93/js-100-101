@@ -52,7 +52,6 @@ console.log(totalMaleAge); // => 444
 // along with forEach or a loop:
 
 let memberDetails = Object.values(munsters);
-console.log(memberDetails);
 let totalMaleAge2 = 0;
 
 memberDetails.forEach((member) => {
