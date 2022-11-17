@@ -47,3 +47,23 @@ scores.sort((a, b) => {
 });
 
 console.log(scores);
+
+console.log(
+  [
+    { a: "ant", b: "elephant" },
+    { c: "cat", d: "dog" },
+  ].filter((object) => {
+    return Object.keys(object).every((key) => object[key][0] === key);
+  })
+);
+// => [ { c: 'cat', d: 'dog' } ]
+
+console.log(
+  [
+    { a: "ant", b: "elephant" },
+    { c: "cat", d: "dog" },
+  ].filter((object) => {
+    return Object.keys(object).some((key) => object[key][0] === key);
+  })
+);
+// => [ { a: 'ant', b: 'elephant' }, { c: 'cat', d: 'dog' } ]

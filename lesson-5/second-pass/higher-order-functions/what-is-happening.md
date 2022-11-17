@@ -161,10 +161,10 @@ Result:
 This example outputs and returns the following:
 
 ```jsx
-18
-7
-12
-=> undefined
+// 18
+// 7
+// 12
+// => undefined
 ```
 
 Because forEach ignores the callback's return value, this was a relatively straight forward example.
@@ -212,4 +212,156 @@ Result:
 
 ### NOTE:
 
-By now, you should be starting to realize that the return value of every expression is important. You can ignore an expression's return value when it isn't used in the code. More often than not, though, some implied return value is used in subtle ways that affect your code. Pay attention to the details.
+By now, you should be starting to realize that the return value of every expression is important.
+
+You can ignore an expression's return value when it isn't used in the code. More often than not, though, some implied return value is used in subtle ways that affect your code. Pay attention to the details.
+
+---
+
+## 5 (MY SOLUTION)
+
+Let's mix things up even more. In the following example, we have an array of objects, and we want to select all of the elements where every key matches the first letter of the value.
+
+```jsx
+[
+  { a: "ant", b: "elephant" },
+  { c: "cat", d: "dog" },
+].filter((object) => {
+  return Object.keys(object).every((key) => object[key][0] === key);
+});
+
+// => [ { c: 'cat', d: 'dog' } ]
+```
+
+### ACTIONS PERFORMED ON:
+
+- filter method performed on an array of simple objects
+- `object` cb execution to which each object of the array is assigned
+- Object.keys method performed on the `object` cb function returning string representations of `object` key name
+- every method performed on the array of the `object` cb function's keys string representations
+- every's `key` cb execution performed on each string representation of the `object` cb function
+- **element reference operator** performed on the value of each `object` cb function's keys accessing the first element of said keys
+- strictly equal comparison operator _performed on_ `objects` key string representations at index 0 _comparing it to_ the values assigned to the every's `key` cb function
+
+### SIDE EFFECTS
+
+- No side effects
+
+### RETURN VALUE | RETURN VALUE USED?
+
+- `object[key][0] === key` => `true, false, true, true`: used by `key` to assign return value.
+- `key` => `true, false, true, true`: used by every method to present truthy or falsy results
+- every => `true, false`: used by the `object` callback to present truthy or falsy results to filter
+- Object.keys => `["a", "b"]["c", "d"]`: no
+- `object` => `{ c: 'cat', d: 'dog' }`: used by filter
+- filter => `[{ c: 'cat', d: 'dog' }]`: No
+
+---
+
+## 8
+
+This example contains a three-level nested array. Take your time and try to break down each component. Hint: the top-level array is a 2-element array.
+
+```jsx
+[
+  [[1], [2], [3], [4]],
+  [["a"], ["b"], ["c"]],
+].map((element1) => {
+  return element1.forEach((element2) => {
+    return element2.filter((element3) => {
+      return element3.length > 0;
+    });
+  });
+});
+
+// => [ undefined, undefined ]
+```
+
+### ACTIONS PERFORMED ON:
+
+- map method performed on a three-level nested array
+- `element1` cb execution performed on the first subarray
+- forEach method performed on the first subarray
+- `element2`cb execution performed on the second subarray
+- filter method perfomed on second subarray
+- `element3`, filter's cb function executes a conditional check on each array element
+- conditional check compares each array element's length property with the number 0.
+
+### SIDE EFFECTS
+
+- No side effects
+
+### RETURN VALUE | RETURN VALUE USED?
+
+- `element3` => `true` for every individual array element: yes - passess truthy or falsy values to filter
+- filter => `[true], [true]`: yes - used in forEach
+- `element2` => `[true], [true]`: no - return value discarded with forEach
+- forEach => `[undefined], [undefined]`: used by `element1`
+- element1 => `[[undefined], [undefined]]`: cb used by map to return transformed array
+- map => `[[undefined], [undefined]]`: No
+
+---
+
+## 6 (MY SOLUTION)
+
+This example is more complicated than the rest, but, at this point, you should be able to break it down effectively. Use the tools you've learned about in this lesson and take as much time as needed. Work on breaking down each component and understanding the return value of each expression.
+
+```jsx
+[
+  [
+    [1, 2],
+    [3, 4],
+  ],
+  [5, 6],
+].map((arr) => {
+  return arr.map((elem) => {
+    if (typeof elem === "number") {
+      // it's a number
+      return elem + 1;
+    } else {
+      // it's an array
+      return elem.map((number) => number + 1);
+    }
+  });
+});
+```
+
+Result:
+
+```jsx
+// => [[[2,3][4,5], [5,6]]]
+```
+
+### ACTIONS PERFORMED ON:
+
+Array: item at index 0 is an array with subarrays. item at index 1 is a simple array
+
+- outter map method performed on the original array
+- `arr` cb execution is assigned to each array element (`[[1, 2], [3, 4]], [5 ,6]`)
+- inner map method performed on the inner array elements (first level)
+- `elem` cb execution is performed on either the 2nd subarray (original array's index [0][0,1], `[1,2] [3,4]`) or the individual elements of the simple array (`5, 6`)
+- `typeof` operator is perfomed on values assigned to `elem` cb
+- strict equality operator compares the `elem` values with the type of number
+- `elem` + 1 performed if the condition is met
+- a second inner map method performed on `elem` if previous condition is not met
+- `number` cb execution is assigned to the values of the original sub-subarray (`1, 2` `3, 4`)
+- `number` + 1 is performed on said values
+
+### SIDE EFFECTS
+
+- No
+
+### RETURN VALUE | RETURN VALUE USED?
+
+- `else` clause:
+  - `elem` cb:
+    - map method:
+      - `number` returns `2, 3, 4, 5`: used by second inner map method
+    - map returns `[[2, 3], [4, 5]]`: used by the `elem` cb
+      **`elem` =>** `[[2, 3], [4, 5]]`
+- `if` statement condition => `true, true`
+  - **`elem` =>** `6, 7`: used by the first inner map method
+- `typeof` returns `"number", "number"`
+- first inner map method => `[[2,3][4,5], [6,7]]`
+- `arr` cb function => `[[2,3][4,5], [6,7]]`
+- outter map method => `[[[2,3][4,5], [6,7]]]`
