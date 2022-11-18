@@ -4,9 +4,9 @@
 
 let obj = {
   first: ["the", "quick"],
-  second: ["brown", "fox"],
+  second: ["brOwn", "fox"],
   third: ["jumped"],
-  fourth: ["over", "the", "lazy", "dog"],
+  fourth: ["ovEr", "the", "lazy", "dog"],
 };
 
 // P:
@@ -22,8 +22,15 @@ let obj = {
 // For each of the strings in the values:
 // -- If the strings include 'aeiou', log them to the console.
 
+let vowels = "";
+
 Object.values(obj).forEach((arr) =>
   arr.forEach((word) => {
-    // implement vowel selection here
+    word.split("").forEach((char) => {
+      if ("aeiouAEIOU".includes(char)) {
+        vowels += char;
+      }
+    });
   })
 );
+console.log(vowels);
