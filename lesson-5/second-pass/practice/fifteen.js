@@ -24,9 +24,14 @@ let arr = [
 // Filter through `arr` and examine each object
 // Return only the objects whose array elements are even numbers
 
-let evenObjectsArr = arr.filter((obj) => {
-  // check EVERY object's values
-  // return only those with ALL even numbers
+// P2:
+// `keys` cb
+
+// -> DID NOT FINISH. COME BACK AND TRY AGAIN <-
+
+let evenObjectsArr = arr.forEach((object) => {
+  Object.values(object).filter();
 });
 
-// console.log(evenObjectsArr);
+// const valuesAreEven = (obj, key) => obj[key] % 2 === 0;
+// return valuesAreEven(object);

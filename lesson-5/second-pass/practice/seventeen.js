@@ -18,10 +18,70 @@
 
 // E: e.g., 'f65c57f6-a6aa-17a8-faa1-a67f2dc9fa91'.
 
+// D:
+
 // A:
 // Store the letters a - f and the numbers 0 - 9 in an array as
 // separate elements.
 // Iterate over the array and select characters at random
+// -- Set randomSelection var to the value of a random number between 0 and 31
+// --
 // Push the random characters into a new array
 // Split the array in chunks by 8-4-4-4 and 12 characters, respectively
 // Return a string with "-" as a separator
+
+let hexadecimalArr = [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+];
+
+let randomSelection = function () {
+  return Math.floor(Math.random() * (32 - 1) + 1);
+};
+
+let randomIndex = function () {
+  let randomValue = randomSelection();
+  if (randomValue > 15) {
+    return Math.floor(randomValue / 2);
+  }
+  return randomValue;
+};
+
+function printUUID() {
+  let uuidArr = [];
+
+  for (let idx = 0; idx < 32; idx += 1) {
+    uuidArr.push(hexadecimalArr[randomIndex()]);
+  }
+
+  let uuidString = uuidArr.join("");
+
+  function uuidSeparator(string) {
+    let octalStr = string.slice(0, 8);
+    let quadStrOne = string.slice(8, 12);
+    let quadStrTwo = string.slice(12, 16);
+    let quadStrThree = string.slice(16, 20);
+    let dodecaStr = string.slice(20, 32);
+
+    let completedUUIDString = `${octalStr}-${quadStrOne}-${quadStrTwo}-${quadStrThree}-${dodecaStr}`;
+    return completedUUIDString;
+  }
+
+  return uuidSeparator(uuidString);
+}
+
+console.log(printUUID());
