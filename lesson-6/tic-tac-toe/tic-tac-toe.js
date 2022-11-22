@@ -29,15 +29,20 @@ Object.values(squares).forEach((square) => {
 });
 
 // Box method
-function logInBox(str) {
+function printBoard(str) {
   let horizontalRule = "+" + "-".repeat(str.length + 2) + "";
 
+  // Row 1
+  console.log(horizontalRule.repeat(3) + "+");
+  console.log(`| ${str} `.repeat(3) + "|");
+  // Row 2
+  console.log(horizontalRule.repeat(3) + "+");
+  console.log(`| ${str} `.repeat(3) + "|");
+  // Row 3 + bottom border
   console.log(horizontalRule.repeat(3) + "+");
   console.log(`| ${str} `.repeat(3) + "|");
   console.log(horizontalRule.repeat(3) + "+");
 }
 
-// Print an empty row
-logInBox("");
-// Print a single row full of "X" characters
-logInBox("X");
+// printBoard("");
+printBoard("O");
