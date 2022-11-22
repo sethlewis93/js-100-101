@@ -30,6 +30,9 @@ let squares = {
 
 function changeBoard(choice) {
   // Add validation logic
+  // Add logic for distinguishing between user and computer choice
+  // User choice data type = string | Computer choice data type = number (??)
+  // IF choice is users: squares[choice] = "X" else: squares[choice] = "O"
   squares[choice] = "X";
 }
 
