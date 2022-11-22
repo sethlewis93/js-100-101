@@ -30,5 +30,4 @@ function logInBox(str) {
   console.log(horizontalRule);
 }
 
-logInBox("To boldly go wher no man has gone before.");
-logInBox("867-530niiiieeeeiiiine");
+logInBox("X");

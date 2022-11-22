@@ -27,11 +27,12 @@ let arr = [
 // P2:
 // `keys` cb
 
-// -> DID NOT FINISH. COME BACK AND TRY AGAIN <-
+// ->  <-
 
-let evenObjectsArr = arr.forEach((object) => {
-  Object.values(object).filter();
+let evenObjectsArr = arr.filter((object) => {
+  return Object.values(object).every((arrOfValues) => {
+    return arrOfValues.every((value) => value % 2 === 0);
+  });
 });
 
-// const valuesAreEven = (obj, key) => obj[key] % 2 === 0;
-// return valuesAreEven(object);
+console.log(evenObjectsArr);
