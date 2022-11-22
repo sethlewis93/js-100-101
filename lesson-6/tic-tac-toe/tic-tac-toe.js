@@ -9,6 +9,9 @@ function prompt(message) {
  * WHEN USER OR COMPUTER CHOICE IS PASSED TO `changeBoard`
  */
 
+// <-----------------------------------------------------------------> //
+// <-----------------------------------------------------------------> //
+
 /**
  ** DISPLAY AN EMPTY BOARD **
  */
@@ -42,11 +45,6 @@ function printBoard() {
     ${horizontalRule}${horizontalRule}${horizontalRule}+
   `;
   return board;
-}
-
-function initializeBoard() {
-  // init and populate the printBoard function with an empty string
-  return "";
 }
 
 /**
@@ -93,19 +91,3 @@ prompt(`
   The computer chose ${currentComputerChoice}
 `);
 console.log(printBoard());
-
-// -> Display the current state of the board <-
-
-// ------------------------------------- //
-// First implementation of marking "X"
-Object.values(squares).forEach((square) => {
-  /// IF the square is set,
-  // -- log "x" to the console: else, leave blank
-  //   for (let squareNum in square) {
-  //     if (square[squareNum]) {
-  //       console.log("X");
-  //     } else {
-  //       console.log(" ");
-  //     }
-  //   }
-});
