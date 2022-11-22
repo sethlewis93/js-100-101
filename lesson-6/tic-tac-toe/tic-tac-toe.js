@@ -5,8 +5,8 @@ function prompt(message) {
 }
 
 /**
- * PRIORITY: DETERMINE HOW TO PERMANENTLY MUTATE THE SQUARES OBJECT
- * WHEN USER OR COMPUTER CHOICE IS PASSED TO `changeBoard`
+ * PRIORITY: WORK OUT THE LOGIC FOR DISTINGUISGHING BETWEEN COMPUTER CHOICE
+ * AND USER CHOICE
  */
 
 // <-----------------------------------------------------------------> //
@@ -93,4 +93,5 @@ let currentComputerChoice = randomNumber;
 prompt(`
   The computer chose ${currentComputerChoice}
 `);
+changeBoard(currentComputerChoice);
 console.log(printBoard());
