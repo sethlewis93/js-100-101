@@ -18,7 +18,12 @@ let squares = {
 
 function invalidNumber(input) {
   // Returns true if the input is either empty string or not a number
-  return input.trimStart() === "" || Number.isNaN(Number(input));
+  return (
+    input.trimStart() === "" ||
+    Number.isNaN(Number(input)) ||
+    Number(input) < 1 ||
+    Number(input) > 10
+  );
 }
 
 function getRandomNumber(min, max) {
@@ -33,8 +38,7 @@ function duplicateSelection(input) {
 }
 
 /**
- * PRIORITY:If a square has already been chosen,
- * the function doesn't prevent the player from choosing that square again.
+ * PRIORITY:
  */
 
 // <-----------------------------------------------------------------> //
@@ -46,9 +50,8 @@ function duplicateSelection(input) {
 
 function changeBoard(choice) {
   if (typeof choice === "string") {
-    // User input validation
     while (invalidNumber(choice)) {
-      prompt("Please enter a valid number with no words special characters.");
+      prompt("Enter a number between 1 and 9: no words special characters.");
       choice = readline.question();
     }
 
@@ -62,7 +65,7 @@ function changeBoard(choice) {
     squares[choice] = "O"; // Change the board to represent computer's choice
   } else {
     // Guard clause for some other data type besides a string entered by user
-    prompt("Please enter a valid number with no words special characters.");
+    prompt("Enter a number between 1 and 9: no words special characters.");
     choice = readline.question();
   }
 }
@@ -91,12 +94,6 @@ console.log(printBoard());
  ** GET AND PRINT USER AND COMPUTER SELECTIONS **
  */
 
-// Ask the user to place an "X" in the square of their choice
-// -- The user can choose the numbers 1 through 9
-// ---- ex: "Square 1"; "1"
-// Validate user's choice
-// Print the user's choice
-
 while (true) {
   prompt(`
     Please choose a square to mark with an 'X'.
@@ -104,18 +101,6 @@ while (true) {
   `);
   let userChoice = readline.question();
   changeBoard(userChoice);
-
-  // Validate the user's input:
-  // -- The user's input must include a valid number
-  // -- A valid number means:
-  // ---- No decimals or symbols
-  // ---- Any input prior to the numerical value is trimmed/execluded
-  // ---- Any input after the numerical valie is trimmed/excluded
-
-  // Have the computer place an "O" in a random square that is not already taken
-  // > Validate computerChoice <
-  // IF computerChoice === userChoice || a choice the computer has already made:
-  // -- computer must choose again
 
   let computerChoice = getRandomNumber(1, 9);
   while (duplicateSelection(computerChoice)) {
