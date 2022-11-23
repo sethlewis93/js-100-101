@@ -4,6 +4,13 @@ function prompt(message) {
   console.log(`➡️ ${message}`);
 }
 
+function getRandomNumber(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  // eslint-disable-next-line no-mixed-operators
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 /**
  * PRIORITY: WORK OUT THE LOGIC FOR DISTINGUISGHING BETWEEN COMPUTER CHOICE
  * AND USER CHOICE
@@ -29,11 +36,16 @@ let squares = {
 };
 
 function changeBoard(choice) {
-  // Add validation logic
   // Add logic for distinguishing between user and computer choice
-  // User choice data type = string | Computer choice data type = number (??)
-  // IF choice is users: squares[choice] = "X" else: squares[choice] = "O"
-  squares[choice] = "X";
+  if (typeof choice === "string") {
+    squares[choice] = "X";
+  } else if (typeof choice === "number") {
+    squares[choice] = "O";
+  } else {
+    // do something to indicate the data type is wrong
+    prompt("Please enter a number with no symbols or special characters");
+    // Add logic to get a new entry from the user
+  }
 }
 
 function printBoard() {
@@ -59,9 +71,6 @@ console.log(printBoard());
 /**
  ** GET AND PRINT USER AND COMPUTER SELECTIONS **
  */
-
-let choices = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-let randomNumber = Math.floor(Math.random() * choices.length);
 
 // Ask the user to place an "X" in the square of their choice
 // -- The user can choose the numbers 1 through 9
@@ -89,7 +98,7 @@ console.log(`➡️ You selected: ${userChoice}`);
 // IF computerChoice === userChoice || a choice the computer has already made:
 // -- computer must choose again
 
-let currentComputerChoice = randomNumber;
+let currentComputerChoice = getRandomNumber(1, 9);
 prompt(`
   The computer chose ${currentComputerChoice}
 `);
