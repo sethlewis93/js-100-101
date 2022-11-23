@@ -42,7 +42,8 @@ function duplicateSelection(input) {
   return squares[input] !== EMPTY_SQUARE;
 }
 
-function determineWinner(boardObj) {
+function callTieGame(boardObj) {
+  // Add logic to confirm we don't have a winner
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
 }
 
@@ -50,7 +51,7 @@ function determineWinner(boardObj) {
  * PRIORITY: DEVELOP LOOPING LOGIC:
  * -> WHEN IS THE GAME OVER?
  * -> HOW DO WE DETERMINE A WINNER?
- * -> HOW DO WE DETERMINE A TIE?
+ * -> HOW DO WE DETERMINE A TIE? ✅
  */
 
 // <-----------------------------------------------------------------> //
@@ -114,10 +115,11 @@ while (true) {
   let userChoice = readline.question();
   changeBoard(userChoice);
 
-  determineWinner(squares);
-
-  if (!determineWinner(squares)) {
-    prompt("game over");
+  // Check whether we have a tie:
+  // "X" always ends the game first if "O" has not already won
+  callTieGame(squares);
+  if (!callTieGame(squares)) {
+    prompt("We have a tie");
     console.log(printBoard());
     break;
   }
