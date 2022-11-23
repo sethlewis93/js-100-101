@@ -1,19 +1,24 @@
 let readline = require("readline-sync");
 
+// App Constants
+const EMPTY_SQUARE = " ";
+const USER_MARKER = "X";
+const COMPUTER_MARKER = "O";
+
 function prompt(message) {
   console.log(`➡️ ${message}`);
 }
 
 let squares = {
-  1: " ",
-  2: " ",
-  3: " ",
-  4: " ",
-  5: " ",
-  6: " ",
-  7: " ",
-  8: " ",
-  9: " ",
+  1: EMPTY_SQUARE,
+  2: EMPTY_SQUARE,
+  3: EMPTY_SQUARE,
+  4: EMPTY_SQUARE,
+  5: EMPTY_SQUARE,
+  6: EMPTY_SQUARE,
+  7: EMPTY_SQUARE,
+  8: EMPTY_SQUARE,
+  9: EMPTY_SQUARE,
 };
 
 function invalidNumber(input) {
@@ -34,7 +39,7 @@ function getRandomNumber(min, max) {
 }
 
 function duplicateSelection(input) {
-  return squares[input] !== " ";
+  return squares[input] !== EMPTY_SQUARE;
 }
 
 /**
@@ -60,9 +65,9 @@ function changeBoard(choice) {
       choice = readline.question();
     }
 
-    squares[choice] = "X"; // Change the board to represent user's choice
+    squares[choice] = USER_MARKER; // Change the board to represent user's choice
   } else if (typeof choice === "number") {
-    squares[choice] = "O"; // Change the board to represent computer's choice
+    squares[choice] = COMPUTER_MARKER; // Change the board to represent computer's choice
   } else {
     // Guard clause for some other data type besides a string entered by user
     prompt("Enter a number between 1 and 9: no words special characters.");
