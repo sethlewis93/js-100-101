@@ -58,13 +58,13 @@ let squares = {
   9: EMPTY_SQUARE,
 };
 
-// Seth collection of user's marks
+// Set collection of user's marks
 let usersMarks = Object.entries(squares).filter((pair) => {
   let [key, val] = pair;
   return [key, val][1] === "X";
 });
 
-// Seth collection of computer's marks
+// Set collection of computer's marks
 let computersMarks = Object.entries(squares).filter((pair) => {
   let [key, val] = pair;
   return [key, val][1] === "O";
