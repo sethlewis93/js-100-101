@@ -58,18 +58,13 @@ let squares = {
   9: EMPTY_SQUARE,
 };
 
-// Break squares object in to array of k-v pairs
-// Loop over the first level of arrays to get the values
-// If the first 3 positions have truthy values:
-// -- Loop over the values
-// -- Are the values equal to the same player's marking?
-// ---- Set {player}Wins var -> true
-
+// Seth collection of user's marks
 let usersMarks = Object.entries(squares).filter((pair) => {
   let [key, val] = pair;
   return [key, val][1] === "X";
 });
 
+// Seth collection of computer's marks
 let computersMarks = Object.entries(squares).filter((pair) => {
   let [key, val] = pair;
   return [key, val][1] === "O";
@@ -90,3 +85,7 @@ let rowOne = "123";
 
 console.log(determineWinner(usersMarks, rowOne));
 console.log(determineWinner(computersMarks, rowOne));
+
+// We need a way to call determine winner only twice:
+// Once with usersMarks and a collection of all patterns
+// Once with computersMarks and a collection of all pattenrs
