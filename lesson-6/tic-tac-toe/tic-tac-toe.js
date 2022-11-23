@@ -42,8 +42,15 @@ function duplicateSelection(input) {
   return squares[input] !== EMPTY_SQUARE;
 }
 
+function determineWinner(boardObj) {
+  return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
+}
+
 /**
- * PRIORITY:
+ * PRIORITY: DEVELOP LOOPING LOGIC:
+ * -> WHEN IS THE GAME OVER?
+ * -> HOW DO WE DETERMINE A WINNER?
+ * -> HOW DO WE DETERMINE A TIE?
  */
 
 // <-----------------------------------------------------------------> //
@@ -106,6 +113,14 @@ while (true) {
   `);
   let userChoice = readline.question();
   changeBoard(userChoice);
+
+  determineWinner(squares);
+
+  if (!determineWinner(squares)) {
+    prompt("game over");
+    console.log(printBoard());
+    break;
+  }
 
   let computerChoice = getRandomNumber(1, 9);
   while (duplicateSelection(computerChoice)) {
