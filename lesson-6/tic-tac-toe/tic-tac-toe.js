@@ -4,6 +4,11 @@ function prompt(message) {
   console.log(`➡️ ${message}`);
 }
 
+function invalidNumber(number) {
+  // Returns true if the input is either empty string or not a number
+  return number.trimStart() === "" || Number.isNaN(Number(number));
+}
+
 function getRandomNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -12,8 +17,7 @@ function getRandomNumber(min, max) {
 }
 
 /**
- * PRIORITY: WORK OUT THE LOGIC FOR DISTINGUISGHING BETWEEN COMPUTER CHOICE
- * AND USER CHOICE
+ * PRIORITY:
  */
 
 // <-----------------------------------------------------------------> //
@@ -38,13 +42,17 @@ let squares = {
 function changeBoard(choice) {
   // Add logic for distinguishing between user and computer choice
   if (typeof choice === "string") {
+    while (invalidNumber(choice)) {
+      prompt("Please enter a valid number with no words special characters.");
+      choice = readline.question();
+    }
     squares[choice] = "X";
   } else if (typeof choice === "number") {
     squares[choice] = "O";
   } else {
-    // do something to indicate the data type is wrong
-    prompt("Please enter a number with no symbols or special characters");
-    // Add logic to get a new entry from the user
+    // Guard clause for some other data type besides a string entered by user
+    prompt("Please enter a valid number with no words special characters.");
+    choice = readline.question();
   }
 }
 
@@ -84,7 +92,6 @@ prompt(`
 `);
 let userChoice = readline.question();
 changeBoard(userChoice);
-console.log(`➡️ You selected: ${userChoice}`);
 
 // Validate the user's input:
 // -- The user's input must include a valid number
