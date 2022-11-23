@@ -9,6 +9,7 @@ function prompt(message) {
   console.log(`➡️ ${message}`);
 }
 
+// The Board
 let squares = {
   1: EMPTY_SQUARE,
   2: EMPTY_SQUARE,
@@ -20,6 +21,18 @@ let squares = {
   8: EMPTY_SQUARE,
   9: EMPTY_SQUARE,
 };
+
+// The winning patterns
+let rowOne = "123";
+let rowTwo = "456";
+let rowThree = "789";
+
+let colOne = "147";
+let colTwo = "258";
+let colThree = "369";
+
+let diagonalOne = "159";
+let diagonalTwo = "357";
 
 function invalidNumber(input) {
   // Returns true if the input is either empty string or not a number
@@ -45,6 +58,16 @@ function duplicateSelection(input) {
 function callTieGame(boardObj) {
   // Add logic to confirm we don't have a winner
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
+}
+
+function determineWinner(arrOfMarks, pattern) {
+  let markedSquares = "";
+
+  for (let idx = 0; idx < arrOfMarks.length; idx += 1) {
+    markedSquares += arrOfMarks[idx][0];
+  }
+
+  return markedSquares.includes(pattern);
 }
 
 /**
@@ -135,4 +158,18 @@ while (true) {
   `);
   changeBoard(computerChoice);
   console.log(printBoard());
+
+  // -> Check for Winner <-
+
+  // Set collection of user's marks
+  let usersMarks = Object.entries(squares).filter((pair) => {
+    let [key, val] = pair;
+    return [key, val][1] === "X";
+  });
+
+  // Set collection of computer's marks
+  let computersMarks = Object.entries(squares).filter((pair) => {
+    let [key, val] = pair;
+    return [key, val][1] === "O";
+  });
 }

@@ -80,11 +80,35 @@ function determineWinner(arrOfMarks, pattern) {
   return markedSquares.includes(pattern);
 }
 
-// Example of a pattern to match
+// The winning patterns
 let rowOne = "123";
+let rowTwo = "456";
+let rowThree = "789";
 
-console.log(determineWinner(usersMarks, rowOne));
-console.log(determineWinner(computersMarks, rowOne));
+let colOne = "147";
+let colTwo = "258";
+let colThree = "369";
+
+let diagonalOne = "159";
+let diagonalTwo = "357";
+
+determineWinner(usersMarks, rowOne);
+determineWinner(usersMarks, rowTwo);
+determineWinner(usersMarks, rowThree);
+determineWinner(usersMarks, colOne);
+determineWinner(usersMarks, colTwo);
+determineWinner(usersMarks, colThree);
+determineWinner(usersMarks, diagonalOne);
+determineWinner(usersMarks, diagonalTwo);
+
+determineWinner(computersMarks, rowOne);
+determineWinner(computersMarks, rowTwo);
+determineWinner(computersMarks, rowThree);
+determineWinner(computersMarks, colOne);
+determineWinner(computersMarks, colTwo);
+determineWinner(computersMarks, colThree);
+determineWinner(computersMarks, diagonalOne);
+determineWinner(computersMarks, diagonalTwo);
 
 // We need a way to call determine winner only twice:
 // Once with usersMarks and a collection of all patterns
