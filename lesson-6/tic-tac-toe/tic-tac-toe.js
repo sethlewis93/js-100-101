@@ -51,6 +51,8 @@ function callTieGame(boardObj) {
  * PRIORITY: DEVELOP LOOPING LOGIC:
  * -> WHEN IS THE GAME OVER?
  * -> HOW DO WE DETERMINE A WINNER?
+ * * -> Are positions 0 - 2 of the Board Object populated keys arr?
+ * * -> Yes? That's your winner
  * -> HOW DO WE DETERMINE A TIE? ✅
  */
 
