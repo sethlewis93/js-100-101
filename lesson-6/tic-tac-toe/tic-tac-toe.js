@@ -43,7 +43,7 @@ function duplicateSelection(input) {
   return squares[input] !== EMPTY_SQUARE;
 }
 
-function callTieGame(boardObj) {
+function areSquaresAvailable(boardObj) {
   // Add logic to confirm we don't have a winner
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
 }
@@ -120,8 +120,9 @@ while (true) {
 
   // Check whether we have a tie:
   // "X" always ends the game first if "O" has not already won
-  callTieGame(squares);
-  if (!callTieGame(squares)) {
+  areSquaresAvailable(squares);
+
+  if (!areSquaresAvailable(squares)) {
     prompt("We have a tie");
     console.log(printBoard());
     break;
@@ -135,6 +136,7 @@ while (true) {
     The computer chose ${computerChoice}
   `);
   changeBoard(computerChoice);
+  console.clear();
   console.log(printBoard());
 
   // -> Check for Winner <-
