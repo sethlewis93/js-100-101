@@ -65,10 +65,6 @@ function areSquaresAvailable(boardObj) {
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
 }
 
-// function aPlayerWon(board) {
-//   return !!detectWinner();
-// }
-
 function detectWinner(winningLines) {
   for (let idx = 0; idx < winningLines.length; idx += 1) {
     let [sq1, sq2, sq3] = winningLines[idx];
@@ -139,7 +135,7 @@ prompt("Let's play Tic-Tac-Toe!");
 console.log(printBoard());
 
 /**
- ** GET AND PRINT USER AND COMPUTER SELECTIONS **
+ ** GAME LOOP: GET AND PRINT USER AND COMPUTER SELECTIONS **
  */
 
 while (true) {
