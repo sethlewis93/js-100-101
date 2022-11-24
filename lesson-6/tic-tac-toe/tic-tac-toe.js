@@ -1,6 +1,5 @@
 /**
- * PRIORITY: REFACTOR THE GAME LOOP SO THAT AS SOON AS THERE IS A WINNER,
- * THE GAME ENDS. CURRENTLY, IF THE USER WINS THE COMPUTER STILL GETS A TURN
+ * PRIORITY: DISPLAY BOARD AFTER WINS AND TIES
  */
 
 let readline = require("readline-sync");
@@ -39,6 +38,30 @@ let winningLinesArr = [
   [3, 5, 7],
 ];
 
+function userChooses() {
+  prompt(`
+  Please choose a square to mark with an 'X'.
+  You may choose between the numbers 1 and 9.
+`);
+  let userChoice = readline.question();
+  changeBoard(userChoice);
+}
+
+function computerChooses() {
+  let computerChoice = getRandomNumber(1, 9);
+
+  while (duplicateSelection(computerChoice)) {
+    computerChoice = getRandomNumber(1, 9);
+  }
+
+  prompt(`
+    The computer chose ${computerChoice}
+  `);
+
+  changeBoard(computerChoice);
+  console.clear();
+}
+
 function invalidNumber(input) {
   // Returns true if the input is either empty string or not a number
   return (
@@ -61,7 +84,6 @@ function duplicateSelection(input) {
 }
 
 function areSquaresAvailable(boardObj) {
-  // Add logic to confirm we don't have a winner
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
 }
 
@@ -116,7 +138,7 @@ function changeBoard(choice) {
 
 function printBoard() {
   let horizontalRule = "+" + "-".repeat(3) + "";
-  let squares = `
+  console.log(`
     ${horizontalRule}${horizontalRule}${horizontalRule}+
     | ${board[1]} | ${board[2]} | ${board[3]} |
     ${horizontalRule}${horizontalRule}${horizontalRule}+
@@ -124,52 +146,37 @@ function printBoard() {
     ${horizontalRule}${horizontalRule}${horizontalRule}+
     | ${board[7]} | ${board[8]} | ${board[9]} |
     ${horizontalRule}${horizontalRule}${horizontalRule}+
-  `;
-  return squares;
+  `);
 }
 
 /**
  ** START THE GAME **
  */
 prompt("Let's play Tic-Tac-Toe!");
-console.log(printBoard());
+printBoard();
 
 /**
  ** GAME LOOP: GET AND PRINT USER AND COMPUTER SELECTIONS **
  */
 
 while (true) {
-  // User's turn
-  prompt(`
-    Please choose a square to mark with an 'X'.
-    You may choose between the numbers 1 and 9.
-  `);
-  let userChoice = readline.question();
-  changeBoard(userChoice);
+  userChooses();
 
-  // Computer's turn
-  let computerChoice = getRandomNumber(1, 9);
-  while (duplicateSelection(computerChoice)) {
-    computerChoice = getRandomNumber(1, 9);
-  }
-  prompt(`
-    The computer chose ${computerChoice}
-  `);
-  changeBoard(computerChoice);
-  console.clear();
-  console.log(printBoard());
+  detectWinner(winningLinesArr);
+  if (detectWinner(winningLinesArr) || !areSquaresAvailable(board)) break;
 
-  // -> Check whether we have a tie <-
-  areSquaresAvailable(board);
-  if (!areSquaresAvailable(board)) {
-    prompt("It's a tie!");
-    break;
-  }
+  computerChooses();
+  printBoard();
 
-  // -> Check for Winner <-
-  if (detectWinner(winningLinesArr)) {
-    prompt(`${detectWinner(winningLinesArr)} wins!`);
-    console.log(printBoard());
-    break;
-  }
+  detectWinner(winningLinesArr);
+  if (detectWinner(winningLinesArr) || !areSquaresAvailable(board)) break;
+}
+
+// -> End game <-
+if (!areSquaresAvailable(board) && !detectWinner(winningLinesArr)) {
+  prompt("It's a tie!");
+  printBoard();
+} else if (detectWinner(winningLinesArr)) {
+  prompt(`${detectWinner(winningLinesArr)} wins!`);
+  printBoard();
 }
