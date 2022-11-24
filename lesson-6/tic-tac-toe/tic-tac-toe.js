@@ -10,7 +10,7 @@ function prompt(message) {
 }
 
 // The Board
-let squares = {
+let board = {
   1: EMPTY_SQUARE,
   2: EMPTY_SQUARE,
   3: EMPTY_SQUARE,
@@ -40,13 +40,19 @@ function getRandomNumber(min, max) {
 }
 
 function duplicateSelection(input) {
-  return squares[input] !== EMPTY_SQUARE;
+  return board[input] !== EMPTY_SQUARE;
 }
 
 function areSquaresAvailable(boardObj) {
   // Add logic to confirm we don't have a winner
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
 }
+
+function aPlayerWon(board) {
+  return !!detectWinner(board);
+}
+
+function detectWinner(board) {}
 
 /**
  * PRIORITY: DEVELOP LOOPING LOGIC:
@@ -76,9 +82,9 @@ function changeBoard(choice) {
       choice = readline.question();
     }
 
-    squares[choice] = USER_MARKER; // Change the board to represent user's choice
+    board[choice] = USER_MARKER; // Change the board to represent user's choice
   } else if (typeof choice === "number") {
-    squares[choice] = COMPUTER_MARKER; // Change the board to represent computer's choice
+    board[choice] = COMPUTER_MARKER; // Change the board to represent computer's choice
   } else {
     // Guard clause for some other data type besides a string entered by user
     prompt("Enter a number between 1 and 9: no words special characters.");
@@ -88,16 +94,16 @@ function changeBoard(choice) {
 
 function printBoard() {
   let horizontalRule = "+" + "-".repeat(3) + "";
-  let board = `
+  let squares = `
     ${horizontalRule}${horizontalRule}${horizontalRule}+
-    | ${squares[1]} | ${squares[2]} | ${squares[3]} |
+    | ${board[1]} | ${board[2]} | ${board[3]} |
     ${horizontalRule}${horizontalRule}${horizontalRule}+
-    | ${squares[4]} | ${squares[5]} | ${squares[6]} |
+    | ${board[4]} | ${board[5]} | ${board[6]} |
     ${horizontalRule}${horizontalRule}${horizontalRule}+
-    | ${squares[7]} | ${squares[8]} | ${squares[9]} |
+    | ${board[7]} | ${board[8]} | ${board[9]} |
     ${horizontalRule}${horizontalRule}${horizontalRule}+
   `;
-  return board;
+  return squares;
 }
 
 /**
@@ -120,13 +126,9 @@ while (true) {
 
   // Check whether we have a tie:
   // "X" always ends the game first if "O" has not already won
-  areSquaresAvailable(squares);
+  areSquaresAvailable(board);
 
-  if (!areSquaresAvailable(squares)) {
-    prompt("We have a tie");
-    console.log(printBoard());
-    break;
-  }
+  if (aPlayerWon(board) || !areSquaresAvailable(board)) break;
 
   let computerChoice = getRandomNumber(1, 9);
   while (duplicateSelection(computerChoice)) {
@@ -141,14 +143,19 @@ while (true) {
 
   // -> Check for Winner <-
 
+  if (aPlayerWon(board)) {
+    prompt(`${detectWinner(board)} wins!`);
+  } else {
+    prompt("It's a tie!");
+  }
   // Set collection of user's marks
-  let usersMarks = Object.entries(squares).filter((pair) => {
+  let usersMarks = Object.entries(board).filter((pair) => {
     let [key, val] = pair;
     return [key, val][1] === "X";
   });
 
   // Set collection of computer's marks
-  let computersMarks = Object.entries(squares).filter((pair) => {
+  let computersMarks = Object.entries(board).filter((pair) => {
     let [key, val] = pair;
     return [key, val][1] === "O";
   });
