@@ -1,3 +1,8 @@
+/**
+ * PRIORITY: REFACTOR THE GAME LOOP SO THAT AS SOON AS THERE IS A WINNER,
+ * THE GAME ENDS. CURRENTLY, IF THE USER WINS THE COMPUTER STILL GETS A TURN
+ */
+
 let readline = require("readline-sync");
 
 // App Constants
@@ -21,6 +26,18 @@ let board = {
   8: EMPTY_SQUARE,
   9: EMPTY_SQUARE,
 };
+
+// Winning Lines
+let winningLinesArr = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+  [1, 4, 7],
+  [2, 5, 8],
+  [3, 6, 9],
+  [1, 5, 9],
+  [3, 5, 7],
+];
 
 function invalidNumber(input) {
   // Returns true if the input is either empty string or not a number
@@ -48,20 +65,29 @@ function areSquaresAvailable(boardObj) {
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
 }
 
-function aPlayerWon(board) {
-  return !!detectWinner(board);
+// function aPlayerWon(board) {
+//   return !!detectWinner();
+// }
+
+function detectWinner(winningLines) {
+  for (let idx = 0; idx < winningLines.length; idx += 1) {
+    let [sq1, sq2, sq3] = winningLines[idx];
+    if (
+      board[sq1] === USER_MARKER &&
+      board[sq2] === USER_MARKER &&
+      board[sq3] === USER_MARKER
+    ) {
+      return "User";
+    } else if (
+      board[sq1] === COMPUTER_MARKER &&
+      board[sq2] === COMPUTER_MARKER &&
+      board[sq3] === COMPUTER_MARKER
+    ) {
+      return "Computer";
+    }
+  }
+  return null;
 }
-
-function detectWinner(board) {}
-
-/**
- * PRIORITY: DEVELOP LOOPING LOGIC:
- * -> WHEN IS THE GAME OVER?
- * -> HOW DO WE DETERMINE A WINNER?
- * * -> Are positions 0 - 2 of the Board Object populated keys arr?
- * * -> Yes? That's your winner
- * -> HOW DO WE DETERMINE A TIE? ✅
- */
 
 // <-----------------------------------------------------------------> //
 // <-----------------------------------------------------------------> //
@@ -117,6 +143,7 @@ console.log(printBoard());
  */
 
 while (true) {
+  // User's turn
   prompt(`
     Please choose a square to mark with an 'X'.
     You may choose between the numbers 1 and 9.
@@ -124,12 +151,7 @@ while (true) {
   let userChoice = readline.question();
   changeBoard(userChoice);
 
-  // Check whether we have a tie:
-  // "X" always ends the game first if "O" has not already won
-  areSquaresAvailable(board);
-
-  if (aPlayerWon(board) || !areSquaresAvailable(board)) break;
-
+  // Computer's turn
   let computerChoice = getRandomNumber(1, 9);
   while (duplicateSelection(computerChoice)) {
     computerChoice = getRandomNumber(1, 9);
@@ -141,22 +163,17 @@ while (true) {
   console.clear();
   console.log(printBoard());
 
-  // -> Check for Winner <-
-
-  if (aPlayerWon(board)) {
-    prompt(`${detectWinner(board)} wins!`);
-  } else {
+  // -> Check whether we have a tie <-
+  areSquaresAvailable(board);
+  if (!areSquaresAvailable(board)) {
     prompt("It's a tie!");
+    break;
   }
-  // Set collection of user's marks
-  let usersMarks = Object.entries(board).filter((pair) => {
-    let [key, val] = pair;
-    return [key, val][1] === "X";
-  });
 
-  // Set collection of computer's marks
-  let computersMarks = Object.entries(board).filter((pair) => {
-    let [key, val] = pair;
-    return [key, val][1] === "O";
-  });
+  // -> Check for Winner <-
+  if (detectWinner(winningLinesArr)) {
+    prompt(`${detectWinner(winningLinesArr)} wins!`);
+    console.log(printBoard());
+    break;
+  }
 }
