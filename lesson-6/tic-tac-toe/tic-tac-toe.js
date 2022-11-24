@@ -1,5 +1,5 @@
 /**
- * PRIORITY: DISPLAY BOARD AFTER WINS AND TIES
+ * PRIORITY: CLEAN UP CODE & OFFER ANOTHER ROUND
  */
 
 let readline = require("readline-sync");
@@ -27,7 +27,7 @@ let board = {
 };
 
 // Winning Lines
-let winningLinesArr = [
+let winningLines = [
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 9],
@@ -87,9 +87,9 @@ function areSquaresAvailable(boardObj) {
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
 }
 
-function detectWinner(winningLines) {
-  for (let idx = 0; idx < winningLines.length; idx += 1) {
-    let [sq1, sq2, sq3] = winningLines[idx];
+function detectWinner(lines) {
+  for (let idx = 0; idx < lines.length; idx += 1) {
+    let [sq1, sq2, sq3] = lines[idx];
     if (
       board[sq1] === USER_MARKER &&
       board[sq2] === USER_MARKER &&
@@ -115,9 +115,12 @@ function detectWinner(winningLines) {
  */
 
 function changeBoard(choice) {
+  // We know that only the user is inputing a data type of string.
+  // Therefore, this is the beginning of the validation check.
+
   if (typeof choice === "string") {
     while (invalidNumber(choice)) {
-      prompt("Enter a number between 1 and 9: no words special characters.");
+      prompt("Enter a number between 1 and 9: no words or special characters.");
       choice = readline.question();
     }
 
@@ -126,18 +129,20 @@ function changeBoard(choice) {
       choice = readline.question();
     }
 
-    board[choice] = USER_MARKER; // Change the board to represent user's choice
+    board[choice] = USER_MARKER;
   } else if (typeof choice === "number") {
-    board[choice] = COMPUTER_MARKER; // Change the board to represent computer's choice
+    board[choice] = COMPUTER_MARKER;
   } else {
     // Guard clause for some other data type besides a string entered by user
-    prompt("Enter a number between 1 and 9: no words special characters.");
+
+    prompt("Enter a number between 1 and 9: no words or special characters.");
     choice = readline.question();
   }
 }
 
 function printBoard() {
   let horizontalRule = "+" + "-".repeat(3) + "";
+
   console.log(`
     ${horizontalRule}${horizontalRule}${horizontalRule}+
     | ${board[1]} | ${board[2]} | ${board[3]} |
@@ -162,21 +167,21 @@ printBoard();
 while (true) {
   userChooses();
 
-  detectWinner(winningLinesArr);
-  if (detectWinner(winningLinesArr) || !areSquaresAvailable(board)) break;
+  detectWinner(winningLines);
+  if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
 
   computerChooses();
   printBoard();
 
-  detectWinner(winningLinesArr);
-  if (detectWinner(winningLinesArr) || !areSquaresAvailable(board)) break;
+  detectWinner(winningLines);
+  if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
 }
 
 // -> End game <-
-if (!areSquaresAvailable(board) && !detectWinner(winningLinesArr)) {
+if (!areSquaresAvailable(board) && !detectWinner(winningLines)) {
   prompt("It's a tie!");
   printBoard();
-} else if (detectWinner(winningLinesArr)) {
-  prompt(`${detectWinner(winningLinesArr)} wins!`);
+} else if (detectWinner(winningLines)) {
+  prompt(`${detectWinner(winningLines)} wins!`);
   printBoard();
 }
