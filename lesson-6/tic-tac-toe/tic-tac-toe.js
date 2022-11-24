@@ -22,18 +22,6 @@ let squares = {
   9: EMPTY_SQUARE,
 };
 
-// The winning patterns
-let rowOne = "123";
-let rowTwo = "456";
-let rowThree = "789";
-
-let colOne = "147";
-let colTwo = "258";
-let colThree = "369";
-
-let diagonalOne = "159";
-let diagonalTwo = "357";
-
 function invalidNumber(input) {
   // Returns true if the input is either empty string or not a number
   return (
@@ -58,16 +46,6 @@ function duplicateSelection(input) {
 function callTieGame(boardObj) {
   // Add logic to confirm we don't have a winner
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
-}
-
-function determineWinner(arrOfMarks, pattern) {
-  let markedSquares = "";
-
-  for (let idx = 0; idx < arrOfMarks.length; idx += 1) {
-    markedSquares += arrOfMarks[idx][0];
-  }
-
-  return markedSquares.includes(pattern);
 }
 
 /**
