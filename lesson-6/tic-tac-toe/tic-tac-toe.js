@@ -38,6 +38,30 @@ let winningLinesArr = [
   [3, 5, 7],
 ];
 
+function userChooses() {
+  prompt(`
+  Please choose a square to mark with an 'X'.
+  You may choose between the numbers 1 and 9.
+`);
+  let userChoice = readline.question();
+  changeBoard(userChoice);
+}
+
+function computerChooses() {
+  let computerChoice = getRandomNumber(1, 9);
+
+  while (duplicateSelection(computerChoice)) {
+    computerChoice = getRandomNumber(1, 9);
+  }
+
+  prompt(`
+    The computer chose ${computerChoice}
+  `);
+
+  changeBoard(computerChoice);
+  console.clear();
+}
+
 function invalidNumber(input) {
   // Returns true if the input is either empty string or not a number
   return (
@@ -114,7 +138,7 @@ function changeBoard(choice) {
 
 function printBoard() {
   let horizontalRule = "+" + "-".repeat(3) + "";
-  let squares = `
+  console.log(`
     ${horizontalRule}${horizontalRule}${horizontalRule}+
     | ${board[1]} | ${board[2]} | ${board[3]} |
     ${horizontalRule}${horizontalRule}${horizontalRule}+
@@ -122,52 +146,37 @@ function printBoard() {
     ${horizontalRule}${horizontalRule}${horizontalRule}+
     | ${board[7]} | ${board[8]} | ${board[9]} |
     ${horizontalRule}${horizontalRule}${horizontalRule}+
-  `;
-  return squares;
+  `);
 }
 
 /**
  ** START THE GAME **
  */
 prompt("Let's play Tic-Tac-Toe!");
-console.log(printBoard());
+printBoard();
 
 /**
  ** GAME LOOP: GET AND PRINT USER AND COMPUTER SELECTIONS **
  */
 
 while (true) {
-  // User's turn
-  prompt(`
-    Please choose a square to mark with an 'X'.
-    You may choose between the numbers 1 and 9.
-  `);
-  let userChoice = readline.question();
-  changeBoard(userChoice);
+  userChooses();
 
   detectWinner(winningLinesArr);
   if (detectWinner(winningLinesArr) || !areSquaresAvailable(board)) break;
 
-  // Computer's turn
-  let computerChoice = getRandomNumber(1, 9);
-  while (duplicateSelection(computerChoice)) {
-    computerChoice = getRandomNumber(1, 9);
-  }
-  prompt(`
-    The computer chose ${computerChoice}
-  `);
-  changeBoard(computerChoice);
-  console.clear();
-  console.log(printBoard());
+  computerChooses();
+  printBoard();
 
   detectWinner(winningLinesArr);
   if (detectWinner(winningLinesArr) || !areSquaresAvailable(board)) break;
 }
 
+// -> End game <-
 if (!areSquaresAvailable(board) && !detectWinner(winningLinesArr)) {
   prompt("It's a tie!");
-  // print board
+  printBoard();
 } else if (detectWinner(winningLinesArr)) {
   prompt(`${detectWinner(winningLinesArr)} wins!`);
-  // print board
+  printBoard();
 }
