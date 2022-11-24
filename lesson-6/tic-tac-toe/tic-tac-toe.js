@@ -1,6 +1,5 @@
 /**
- * PRIORITY: REFACTOR THE GAME LOOP SO THAT AS SOON AS THERE IS A WINNER,
- * THE GAME ENDS. CURRENTLY, IF THE USER WINS THE COMPUTER STILL GETS A TURN
+ * PRIORITY: DISPLAY BOARD AFTER WINS AND TIES
  */
 
 let readline = require("readline-sync");
@@ -61,7 +60,6 @@ function duplicateSelection(input) {
 }
 
 function areSquaresAvailable(boardObj) {
-  // Add logic to confirm we don't have a winner
   return Object.values(boardObj).some((val) => val === EMPTY_SQUARE);
 }
 
@@ -147,6 +145,9 @@ while (true) {
   let userChoice = readline.question();
   changeBoard(userChoice);
 
+  detectWinner(winningLinesArr);
+  if (detectWinner(winningLinesArr) || !areSquaresAvailable(board)) break;
+
   // Computer's turn
   let computerChoice = getRandomNumber(1, 9);
   while (duplicateSelection(computerChoice)) {
@@ -159,17 +160,14 @@ while (true) {
   console.clear();
   console.log(printBoard());
 
-  // -> Check whether we have a tie <-
-  areSquaresAvailable(board);
-  if (!areSquaresAvailable(board)) {
-    prompt("It's a tie!");
-    break;
-  }
+  detectWinner(winningLinesArr);
+  if (detectWinner(winningLinesArr) || !areSquaresAvailable(board)) break;
+}
 
-  // -> Check for Winner <-
-  if (detectWinner(winningLinesArr)) {
-    prompt(`${detectWinner(winningLinesArr)} wins!`);
-    console.log(printBoard());
-    break;
-  }
+if (!areSquaresAvailable(board) && !detectWinner(winningLinesArr)) {
+  prompt("It's a tie!");
+  // print board
+} else if (detectWinner(winningLinesArr)) {
+  prompt(`${detectWinner(winningLinesArr)} wins!`);
+  // print board
 }
