@@ -1,5 +1,6 @@
 /**
- * PRIORITY: CLEAN UP CODE & OFFER ANOTHER ROUND
+ * PRIORITY: ADD LOGIC SO THAT WHEN A PLAYER WINS AFTER ROUND 2,
+ * THE GAME DISPLAYS THE WINNER
  */
 
 let readline = require("readline-sync");
@@ -74,6 +75,12 @@ function changeBoard(choice) {
   }
 }
 
+function clearBoard() {
+  Object.keys(board).forEach((square) => {
+    board[square] = EMPTY_SQUARE;
+  });
+}
+
 function prompt(message) {
   console.log(`➡️ ${message}`);
 }
@@ -117,6 +124,7 @@ function computerChooses() {
 
   changeBoard(computerChoice);
   console.clear();
+  printBoard();
 }
 
 function duplicateSelection(input) {
@@ -155,29 +163,46 @@ function detectWinner(lines) {
  */
 prompt("Let's play Tic-Tac-Toe!");
 printBoard();
+playGame();
 
 /**
  ** GAME LOOP: GET AND PRINT USER AND COMPUTER SELECTIONS **
  */
+function playGame() {
+  while (true) {
+    userChooses();
 
-while (true) {
-  userChooses();
+    detectWinner(winningLines);
+    if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
 
-  detectWinner(winningLines);
-  if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
+    computerChooses();
 
-  computerChooses();
-  printBoard();
-
-  detectWinner(winningLines);
-  if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
+    detectWinner(winningLines);
+    if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
+  }
 }
 
 // -> End game <-
 if (!areSquaresAvailable(board) && !detectWinner(winningLines)) {
   prompt("It's a tie!");
   printBoard();
+
+  prompt("Would you like to play again?");
+  let answer = readline.question();
+
+  if (answer[0].toLowerCase() === "y") {
+    clearBoard();
+    playGame();
+  }
 } else if (detectWinner(winningLines)) {
   prompt(`${detectWinner(winningLines)} wins!`);
   printBoard();
+
+  prompt("Would you like to play again?");
+  let answer = readline.question();
+
+  if (answer[0].toLowerCase() === "y") {
+    clearBoard();
+    playGame();
+  }
 }
