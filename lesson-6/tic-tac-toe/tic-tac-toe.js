@@ -1,5 +1,6 @@
 /**
- * PRIORITY: CLEAN UP CODE & OFFER ANOTHER ROUND
+ * PRIORITY: ADD LOGIC SO THAT WHEN A PLAYER WINS AFTER ROUND 2,
+ * THE GAME DISPLAYS THE WINNER
  */
 
 let readline = require("readline-sync");
@@ -8,10 +9,6 @@ let readline = require("readline-sync");
 const EMPTY_SQUARE = " ";
 const USER_MARKER = "X";
 const COMPUTER_MARKER = "O";
-
-function prompt(message) {
-  console.log(`➡️ ${message}`);
-}
 
 // The Board
 let board = {
@@ -38,6 +35,73 @@ let winningLines = [
   [3, 5, 7],
 ];
 
+function printBoard() {
+  let horizontalRule = "+" + "-".repeat(3) + "";
+
+  console.log(`
+    ${horizontalRule}${horizontalRule}${horizontalRule}+
+    | ${board[1]} | ${board[2]} | ${board[3]} |
+    ${horizontalRule}${horizontalRule}${horizontalRule}+
+    | ${board[4]} | ${board[5]} | ${board[6]} |
+    ${horizontalRule}${horizontalRule}${horizontalRule}+
+    | ${board[7]} | ${board[8]} | ${board[9]} |
+    ${horizontalRule}${horizontalRule}${horizontalRule}+
+  `);
+}
+
+function changeBoard(choice) {
+  // We know that only the user is inputing a data type of string.
+  // Therefore, this is the beginning of the validation check.
+
+  if (typeof choice === "string") {
+    while (invalidNumber(choice)) {
+      prompt("Enter a number between 1 and 9: no words or special characters.");
+      choice = readline.question();
+    }
+
+    while (duplicateSelection(choice)) {
+      prompt("That square is already taken. Please choose a free square.");
+      choice = readline.question();
+    }
+
+    board[choice] = USER_MARKER;
+  } else if (typeof choice === "number") {
+    board[choice] = COMPUTER_MARKER;
+  } else {
+    // Guard clause for some other data type besides a string entered by user
+
+    prompt("Enter a number between 1 and 9: no words or special characters.");
+    choice = readline.question();
+  }
+}
+
+function clearBoard() {
+  Object.keys(board).forEach((square) => {
+    board[square] = EMPTY_SQUARE;
+  });
+}
+
+function prompt(message) {
+  console.log(`➡️ ${message}`);
+}
+
+function invalidNumber(input) {
+  // Returns true if the input is either empty string or not a number
+  return (
+    input.trimStart() === "" ||
+    Number.isNaN(Number(input)) ||
+    Number(input) < 1 ||
+    Number(input) > 10
+  );
+}
+
+function getRandomNumber(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  // eslint-disable-next-line no-mixed-operators
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function userChooses() {
   prompt(`
   Please choose a square to mark with an 'X'.
@@ -60,23 +124,7 @@ function computerChooses() {
 
   changeBoard(computerChoice);
   console.clear();
-}
-
-function invalidNumber(input) {
-  // Returns true if the input is either empty string or not a number
-  return (
-    input.trimStart() === "" ||
-    Number.isNaN(Number(input)) ||
-    Number(input) < 1 ||
-    Number(input) > 10
-  );
-}
-
-function getRandomNumber(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  // eslint-disable-next-line no-mixed-operators
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  printBoard();
 }
 
 function duplicateSelection(input) {
@@ -107,81 +155,48 @@ function detectWinner(lines) {
   return null;
 }
 
-// <-----------------------------------------------------------------> //
-// <-----------------------------------------------------------------> //
-
-/**
- ** DISPLAY AN EMPTY BOARD **
- */
-
-function changeBoard(choice) {
-  // We know that only the user is inputing a data type of string.
-  // Therefore, this is the beginning of the validation check.
-
-  if (typeof choice === "string") {
-    while (invalidNumber(choice)) {
-      prompt("Enter a number between 1 and 9: no words or special characters.");
-      choice = readline.question();
-    }
-
-    while (duplicateSelection(choice)) {
-      prompt("That square is already taken. Please choose a free square.");
-      choice = readline.question();
-    }
-
-    board[choice] = USER_MARKER;
-  } else if (typeof choice === "number") {
-    board[choice] = COMPUTER_MARKER;
-  } else {
-    // Guard clause for some other data type besides a string entered by user
-
-    prompt("Enter a number between 1 and 9: no words or special characters.");
-    choice = readline.question();
+function playAgain() {
+  prompt("Would you like to play again?");
+  let answer = readline.question();
+  if (answer[0].toLowerCase() === "y") {
+    clearBoard();
+    playGame();
   }
 }
 
-function printBoard() {
-  let horizontalRule = "+" + "-".repeat(3) + "";
-
-  console.log(`
-    ${horizontalRule}${horizontalRule}${horizontalRule}+
-    | ${board[1]} | ${board[2]} | ${board[3]} |
-    ${horizontalRule}${horizontalRule}${horizontalRule}+
-    | ${board[4]} | ${board[5]} | ${board[6]} |
-    ${horizontalRule}${horizontalRule}${horizontalRule}+
-    | ${board[7]} | ${board[8]} | ${board[9]} |
-    ${horizontalRule}${horizontalRule}${horizontalRule}+
-  `);
-}
+// <-----------------------------------------------------------------> //
+// <-----------------------------------------------------------------> //
 
 /**
  ** START THE GAME **
  */
 prompt("Let's play Tic-Tac-Toe!");
 printBoard();
+playGame();
 
 /**
  ** GAME LOOP: GET AND PRINT USER AND COMPUTER SELECTIONS **
  */
+function playGame() {
+  while (true) {
+    userChooses();
 
-while (true) {
-  userChooses();
+    detectWinner(winningLines);
+    if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
 
-  detectWinner(winningLines);
-  if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
+    computerChooses();
 
-  computerChooses();
-  printBoard();
-
-  detectWinner(winningLines);
-  if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
+    detectWinner(winningLines);
+    if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
+  }
 }
 
 // -> End game <-
 if (!areSquaresAvailable(board) && !detectWinner(winningLines)) {
   prompt("It's a tie!");
-  printBoard();
+  playAgain();
 } else if (detectWinner(winningLines)) {
   prompt(`${detectWinner(winningLines)} wins!`);
   printBoard();
+  playAgain();
 }
