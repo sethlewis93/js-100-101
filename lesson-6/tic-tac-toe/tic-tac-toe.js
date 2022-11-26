@@ -64,7 +64,6 @@ function changeBoard(choice) {
     board[choice] = COMPUTER_MARKER;
   } else {
     // Guard clause for some other data type besides a string entered by user
-
     prompt("Enter a number between 1 and 9: no words or special characters.");
     choice = readline.question();
   }
@@ -192,7 +191,6 @@ function playAgain() {
   }
 }
 
-// <-----------------------------------------------------------------> //
 // <-----------------------------------------------------------------> //
 
 prompt("Let's play Tic-Tac-Toe!");
