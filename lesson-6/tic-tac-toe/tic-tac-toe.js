@@ -155,6 +155,15 @@ function detectWinner(lines) {
   return null;
 }
 
+function playAgain() {
+  prompt("Would you like to play again?");
+  let answer = readline.question();
+  if (answer[0].toLowerCase() === "y") {
+    clearBoard();
+    playGame();
+  }
+}
+
 // <-----------------------------------------------------------------> //
 // <-----------------------------------------------------------------> //
 
@@ -185,24 +194,9 @@ function playGame() {
 // -> End game <-
 if (!areSquaresAvailable(board) && !detectWinner(winningLines)) {
   prompt("It's a tie!");
-  printBoard();
-
-  prompt("Would you like to play again?");
-  let answer = readline.question();
-
-  if (answer[0].toLowerCase() === "y") {
-    clearBoard();
-    playGame();
-  }
+  playAgain();
 } else if (detectWinner(winningLines)) {
   prompt(`${detectWinner(winningLines)} wins!`);
   printBoard();
-
-  prompt("Would you like to play again?");
-  let answer = readline.question();
-
-  if (answer[0].toLowerCase() === "y") {
-    clearBoard();
-    playGame();
-  }
+  playAgain();
 }
