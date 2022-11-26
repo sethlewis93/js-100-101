@@ -1,8 +1,3 @@
-/**
- * PRIORITY: ADD LOGIC SO THAT WHEN A PLAYER WINS AFTER ROUND 2,
- * THE GAME DISPLAYS THE WINNER
- */
-
 let readline = require("readline-sync");
 
 // App Constants
@@ -85,6 +80,26 @@ function prompt(message) {
   console.log(`➡️ ${message}`);
 }
 
+function playGame() {
+  while (true) {
+    userChooses();
+
+    detectWinner(winningLines);
+    if (detectWinner(winningLines) || !areSquaresAvailable(board)) {
+      endOfGame();
+      break;
+    }
+
+    computerChooses();
+
+    detectWinner(winningLines);
+    if (detectWinner(winningLines) || !areSquaresAvailable(board)) {
+      endOfGame();
+      break;
+    }
+  }
+}
+
 function invalidNumber(input) {
   // Returns true if the input is either empty string or not a number
   return (
@@ -155,48 +170,31 @@ function detectWinner(lines) {
   return null;
 }
 
+function endOfGame() {
+  if (!areSquaresAvailable(board) && !detectWinner(winningLines)) {
+    prompt("It's a tie!");
+    playAgain();
+  } else if (detectWinner(winningLines)) {
+    prompt(`${detectWinner(winningLines)} wins!`);
+    printBoard();
+    playAgain();
+  }
+}
+
 function playAgain() {
   prompt("Would you like to play again?");
   let answer = readline.question();
   if (answer[0].toLowerCase() === "y") {
     clearBoard();
     playGame();
+  } else {
+    prompt("See ya next time!");
   }
 }
 
 // <-----------------------------------------------------------------> //
 // <-----------------------------------------------------------------> //
 
-/**
- ** START THE GAME **
- */
 prompt("Let's play Tic-Tac-Toe!");
 printBoard();
 playGame();
-
-/**
- ** GAME LOOP: GET AND PRINT USER AND COMPUTER SELECTIONS **
- */
-function playGame() {
-  while (true) {
-    userChooses();
-
-    detectWinner(winningLines);
-    if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
-
-    computerChooses();
-
-    detectWinner(winningLines);
-    if (detectWinner(winningLines) || !areSquaresAvailable(board)) break;
-  }
-}
-
-// -> End game <-
-if (!areSquaresAvailable(board) && !detectWinner(winningLines)) {
-  prompt("It's a tie!");
-  playAgain();
-} else if (detectWinner(winningLines)) {
-  prompt(`${detectWinner(winningLines)} wins!`);
-  printBoard();
-  playAgain();
-}
