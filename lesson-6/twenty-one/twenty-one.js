@@ -47,7 +47,7 @@ function dealCards(deck, participantsHand) {
   }
 }
 
-function seeHand(playersHand, dealersHand) {
+function revealHand(playersHand, dealersHand) {
   playersHand.forEach((card) => {
     let [name, amount] = card;
     console.log(`The player has ${amount} ${name}(s) in hand`);
@@ -71,7 +71,7 @@ prompt("Cards are being dealt...");
 dealCards(deckOfCards, playersCards);
 dealCards(deckOfCards, dealersCards);
 
-seeHand(playersCards, dealersCards);
+revealHand(playersCards, dealersCards);
 
 prompt("Ok player: HIT or STAY?");
 let playerChoice = readline.question();
