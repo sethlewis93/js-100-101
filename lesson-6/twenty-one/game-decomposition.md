@@ -69,3 +69,17 @@ Each participant should randomly recieve two cards from the deck.
     - 8 corresponds to card "10" from the deck
     - Check: is `deck[10][1]` > 0 ?
     - If so: decremenent that element by 1 and push `deck[10][0][amountInHand]` to the participant's deck
+
+### MUTATE THE DECK OF CARDS
+
+- Get the value of the second index of the card object's key
+- Set that value as itself decremented by 1
+
+### ACCOUNTING FOR CARDS
+
+- Both participants are initially dealt a hand of two cards.
+- The player can see their 2 cards, but can only see one of the dealer's cards.
+
+## PLAYER'S TURN: HIT OR STAY?
+
+- Prompt the player to decide whether they will hit or stay.
