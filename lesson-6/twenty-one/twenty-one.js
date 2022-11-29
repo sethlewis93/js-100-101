@@ -47,33 +47,61 @@ function dealCards(deck, participantsHand) {
   }
 }
 
-function revealHand(playersHand, dealersHand) {
-  playersHand.forEach((card) => {
+function revealHand(playersCards, dealCards) {
+  playersCards.forEach((card) => {
     let [name, amount] = card;
     console.log(`The player has ${amount} ${name}(s) in hand`);
   });
 
   for (let counter = 0; counter < 1; counter += 1) {
     let randomNum = getRandomNumber(0, 1);
-    let [name, amount] = dealersHand[randomNum];
+    let [name, amount] = dealCards[randomNum];
     console.log(`The dealer has ${amount} ${name} in hand`);
   }
 }
 
-let playersCards = [];
-let dealersCards = [];
+let playersHand = [];
+let dealersHand = [];
+
+function addCardToPlayersHand(hand, deck) {
+  let iterableDeckOfCards = Object.entries(deck);
+  for (let counter = 2; counter <= hand.length; counter += 1) {
+    let randomNum = getRandomNumber(0, 12);
+    let randomCard = iterableDeckOfCards[randomNum][0];
+    let numCardsLeft = deck[randomCard][1];
+
+    let numCardsInHand = numCardsLeft - numCardsLeft + 1; // The number of cards to be dealt to the participant
+    hand.push([randomCard, numCardsInHand]);
+
+    deck[randomCard][1] -= 1; // decrement the number of cards in the deck
+  }
+}
+
+function busted(playersCards) {
+  // Get the players cards
+  // Add the total value of each card
+  // Return true if the total is greater than 21
+}
 
 // <------------------------------------------------------------------>
 
 prompt("Let's play 21!");
 prompt("Cards are being dealt...");
 
-dealCards(deckOfCards, playersCards);
-dealCards(deckOfCards, dealersCards);
+dealCards(deckOfCards, playersHand);
+dealCards(deckOfCards, dealersHand);
 
-revealHand(playersCards, dealersCards);
+revealHand(playersHand, dealersHand);
 
-prompt("Ok player: HIT or STAY?");
-let playerChoice = readline.question();
-// Conditional logic for consequences of player choice here:
-console.log(playerChoice);
+while (true) {
+  prompt("Ok player: HIT or STAY?");
+  let playerChoice = readline.question();
+  if (playerChoice === "stay" || busted()) break;
+}
+
+if (busted()) {
+  // end the game or ask if they want to play again
+} else {
+  // Let the player know how many cards they have
+  // Call the function to calculate the winner
+}
