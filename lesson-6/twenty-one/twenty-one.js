@@ -65,7 +65,9 @@ let dealersHand = [];
 
 function addCardToPlayersHand(hand, deck) {
   let iterableDeckOfCards = Object.entries(deck);
-  for (let counter = 2; counter <= hand.length; counter += 1) {
+
+  for (let counter = hand.length; counter < hand.length + 1; counter += 1) {
+    // something's wrong with this logic...app is hanging
     let randomNum = getRandomNumber(0, 12);
     let randomCard = iterableDeckOfCards[randomNum][0];
     let numCardsLeft = deck[randomCard][1];
