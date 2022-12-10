@@ -7,8 +7,8 @@ const COMPUTER_MARKER = "O";
 
 // The Board
 let board = {
-  1: EMPTY_SQUARE,
-  2: EMPTY_SQUARE,
+  1: USER_MARKER,
+  2: USER_MARKER,
   3: EMPTY_SQUARE,
   4: EMPTY_SQUARE,
   5: EMPTY_SQUARE,
@@ -90,6 +90,8 @@ function playGame() {
     }
 
     computerChooses();
+    announceComputerSelection();
+    printBoard();
 
     detectWinner(winningLines);
     if (detectWinner(winningLines) || !areSquaresAvailable(board)) {
@@ -125,20 +127,54 @@ function userChooses() {
   changeBoard(userChoice);
 }
 
-function computerChooses() {
-  let computerChoice = getRandomNumber(1, 9);
-
-  while (duplicateSelection(computerChoice)) {
-    computerChoice = getRandomNumber(1, 9);
+function determineUserThreat(board, lines) {
+  let threat;
+  for (let idx = 0; idx < lines.length; idx++) {
+    let [sq1, sq2, sq3] = lines[idx];
+    if (board[sq1] === USER_MARKER && board[sq2] === USER_MARKER) {
+      threat = 3;
+      break;
+    } else if (board[sq1] === USER_MARKER && board[sq3] === USER_MARKER) {
+      threat = 2;
+      break;
+    } else if (board[sq2] === USER_MARKER && board[sq3] === USER_MARKER) {
+      threat = 1;
+      break;
+    } else {
+      threat = null;
+    }
   }
 
-  prompt(`
-    The computer chose ${computerChoice}
-  `);
+  // TO-DO: ☝🏾 Refactor so that `threat` is a dynamic value
+  return threat;
+}
 
-  changeBoard(computerChoice);
+function computerChooses() {
+  let computerSelection;
+  let userThreat = determineUserThreat(board, winningLines);
+  let randomNumber = getRandomNumber(1, 9);
+
+  // Assign an integer to computerSelection
+  computerSelection = userThreat || randomNumber;
+
+  // If the square is taken, the computer will randomly select another square
+  while (duplicateSelection(computerSelection)) {
+    computerSelection = randomNumber;
+  }
+  return computerSelection;
+}
+
+/**
+ * TO-DO:
+ * * Create a function that places an "O" on the `winningLines` square
+ * * that the user is threatening
+ */
+
+function announceComputerSelection() {
+  let computerSelection = computerChooses();
+  prompt(`The computer chose ${computerSelection}`);
+  changeBoard(computerSelection);
   console.clear();
-  printBoard();
 }
 
 function duplicateSelection(input) {
