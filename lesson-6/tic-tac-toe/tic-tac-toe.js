@@ -1,3 +1,10 @@
+/**
+ * TO-DOs:
+ * * Fix computer choices implementation in playGame()
+ * * Restore the message that prints to the console about computer's choice
+ * * Determine why the app fails in round 2
+ */
+
 let readline = require("readline-sync");
 
 // App Constants
@@ -9,13 +16,13 @@ const COMPUTER_MARKER = "O";
 let board = {
   1: EMPTY_SQUARE,
   2: EMPTY_SQUARE,
-  3: USER_MARKER,
+  3: EMPTY_SQUARE,
   4: EMPTY_SQUARE,
   5: EMPTY_SQUARE,
   6: EMPTY_SQUARE,
   7: EMPTY_SQUARE,
   8: EMPTY_SQUARE,
-  9: USER_MARKER,
+  9: EMPTY_SQUARE,
 };
 
 // Winning Lines
@@ -89,8 +96,9 @@ function playGame() {
       break;
     }
 
-    computerChooses();
-    announceComputerSelection();
+    // TO-DO: fix this mess. Decide on more sensible implementation
+    changeBoard(computerChooses());
+    console.clear();
     printBoard();
 
     detectWinner(winningLines);
@@ -132,13 +140,13 @@ function determineUserThreat(board, lines) {
   for (let idx = 0; idx < lines.length; idx++) {
     let [sq1, sq2, sq3] = lines[idx];
     if (board[sq1] === USER_MARKER && board[sq2] === USER_MARKER) {
-      threat = lines[idx][2];
+      threat = sq3;
       break;
     } else if (board[sq1] === USER_MARKER && board[sq3] === USER_MARKER) {
-      threat = lines[idx][1];
+      threat = sq2;
       break;
     } else if (board[sq2] === USER_MARKER && board[sq3] === USER_MARKER) {
-      threat = lines[idx][0];
+      threat = sq1;
       break;
     } else {
       threat = null;
@@ -149,32 +157,16 @@ function determineUserThreat(board, lines) {
 }
 
 function computerChooses() {
-  let computerSelection;
-  let userThreat = determineUserThreat(board, winningLines);
-  debugger;
+  let computersChoice;
   let randomNumber = getRandomNumber(1, 9);
-
-  // Assign an integer to computerSelection
-  computerSelection = userThreat || randomNumber;
+  let userThreat = determineUserThreat(board, winningLines);
+  computersChoice = userThreat || randomNumber;
 
   // If the square is taken, the computer will randomly select another square
-  while (duplicateSelection(computerSelection)) {
-    computerSelection = randomNumber;
+  while (duplicateSelection(computersChoice)) {
+    computersChoice = randomNumber;
   }
-  return computerSelection;
-}
-
-/**
- * TO-DO:
- * * Create a function that places an "O" on the `winningLines` square
- * * that the user is threatening
- */
-
-function announceComputerSelection() {
-  let computerSelection = computerChooses();
-  prompt(`The computer chose ${computerSelection}`);
-  changeBoard(computerSelection);
-  console.clear();
+  return computersChoice;
 }
 
 function duplicateSelection(input) {
