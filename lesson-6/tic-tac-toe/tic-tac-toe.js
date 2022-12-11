@@ -7,15 +7,15 @@ const COMPUTER_MARKER = "O";
 
 // The Board
 let board = {
-  1: USER_MARKER,
-  2: USER_MARKER,
-  3: EMPTY_SQUARE,
+  1: EMPTY_SQUARE,
+  2: EMPTY_SQUARE,
+  3: USER_MARKER,
   4: EMPTY_SQUARE,
   5: EMPTY_SQUARE,
   6: EMPTY_SQUARE,
   7: EMPTY_SQUARE,
   8: EMPTY_SQUARE,
-  9: EMPTY_SQUARE,
+  9: USER_MARKER,
 };
 
 // Winning Lines
@@ -132,26 +132,26 @@ function determineUserThreat(board, lines) {
   for (let idx = 0; idx < lines.length; idx++) {
     let [sq1, sq2, sq3] = lines[idx];
     if (board[sq1] === USER_MARKER && board[sq2] === USER_MARKER) {
-      threat = 3;
+      threat = lines[idx][2];
       break;
     } else if (board[sq1] === USER_MARKER && board[sq3] === USER_MARKER) {
-      threat = 2;
+      threat = lines[idx][1];
       break;
     } else if (board[sq2] === USER_MARKER && board[sq3] === USER_MARKER) {
-      threat = 1;
+      threat = lines[idx][0];
       break;
     } else {
       threat = null;
     }
   }
 
-  // TO-DO: ☝🏾 Refactor so that `threat` is a dynamic value
   return threat;
 }
 
 function computerChooses() {
   let computerSelection;
   let userThreat = determineUserThreat(board, winningLines);
+  debugger;
   let randomNumber = getRandomNumber(1, 9);
 
   // Assign an integer to computerSelection
